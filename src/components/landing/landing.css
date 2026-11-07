@@ -1,0 +1,131 @@
+/*
+ * V3 landing — the few things easier in plain CSS than utilities:
+ * the collapsing tool stack (driven by one scrubbed variable, --c),
+ * cursor tilt, the integrations orbit and edge drawing.
+ */
+
+/* ---------- Hero stack ----------------------------------------------------
+ * GSAP scrubs --c from 0 (fanned) to 1 (collapsed). Each card derives its own
+ * staggered progress --ci from it, so the static render (--c: 0) is the fan.   */
+.stack-stage {
+  --c: 0;
+  --sx: 1;
+  --sy: 1;
+  --cs: 1;
+  --tx: 0deg;
+  --ty: 0deg;
+  position: relative;
+  height: 500px;
+  perspective: 1600px;
+  perspective-origin: 50% 30%;
+}
+.stack-inner {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: rotateX(calc(8deg + var(--tx))) rotateY(var(--ty));
+  transition: transform 600ms var(--ease-out);
+}
+.stack-card {
+  --ci: clamp(0, calc(var(--c) * 1.7 - var(--i) * 0.11), 1);
+  --k: calc(1 - var(--ci));
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: 250px;
+  height: 158px;
+  transform: translate(-50%, -50%)
+    translate3d(calc(var(--x) * var(--sx) * var(--k) * 1px), calc(var(--y) * var(--sy) * var(--k) * 1px), calc(var(--z) * var(--k) * 1px))
+    rotateY(calc(var(--ry) * var(--k) * 1deg)) rotate(calc(var(--rz) * var(--k) * 1deg)) scale(calc(var(--cs) * (1 - 0.18 * var(--ci))));
+  opacity: calc(1 - var(--ci) * 0.95);
+  will-change: transform, opacity;
+}
+.stack-sooq {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: 290px;
+  transform: translate(-50%, -50%) translate3d(0, calc(150px * var(--sy) * (1 - var(--c))), 140px) scale(calc(var(--cs) * (0.92 + 0.16 * var(--c))));
+  will-change: transform;
+}
+.stack-count-before { opacity: calc(1 - var(--c) * 2); }
+.stack-count-after { opacity: calc(var(--c) * 2 - 1); }
+
+@media (max-width: 767.98px) {
+  .stack-stage {
+    --sx: 0.27;
+    --sy: 0.72;
+    --cs: 0.68;
+    height: 330px;
+  }
+}
+
+/* ---------- Tilt (fine pointers only, set by TiltCard) -------------------- */
+.tilt {
+  --rx: 0deg;
+  --ry: 0deg;
+  transform: perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform 500ms var(--ease-out);
+  transform-style: preserve-3d;
+}
+
+/* ---------- Edges that draw on (pathLength="1") ---------------------------- */
+.edge-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+/* ---------- Integrations orbit -------------------------------------------- */
+.orbit {
+  --spin: 0deg;
+  --r1: 140px;
+  --r2: 232px;
+  position: relative;
+  width: min(100%, 580px);
+  aspect-ratio: 1;
+  margin-inline: auto;
+}
+.orbit-ring {
+  position: absolute;
+  inset: 0;
+  transform: rotate(var(--dir-spin));
+}
+.orbit-ring[data-ring="1"] { --dir-spin: var(--spin); }
+.orbit-ring[data-ring="2"] { --dir-spin: calc(var(--spin) * -0.6); }
+.orbit-tile {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: rotate(var(--a)) translateY(calc(var(--r) * -1)) rotate(calc(var(--a) * -1)) rotate(calc(var(--dir-spin) * -1)) translate(-50%, -50%);
+  transform-origin: 0 0;
+}
+@media (max-width: 639.98px) {
+  .orbit {
+    --r1: 92px;
+    --r2: 146px;
+  }
+}
+
+
+/* ---------- React Flow theming (playground) -------------------------------- */
+.ss-flow.react-flow {
+  --xy-background-color: transparent;
+  --xy-edge-stroke: var(--line-strong);
+  --xy-edge-stroke-selected: var(--blue);
+  --xy-edge-stroke-width: 1.5;
+  --xy-handle-background-color: var(--blue);
+  --xy-handle-border-color: var(--bg-elev);
+  --xy-connectionline-stroke: var(--amber);
+  --xy-attribution-background-color: transparent;
+  --xy-controls-button-background-color: var(--bg-elev);
+  --xy-controls-button-background-color-hover: var(--bg-sunken);
+  --xy-controls-button-color: var(--ink-2);
+  --xy-controls-button-border-color: var(--line);
+  --xy-node-boxshadow-selected: 0 0 0 2px var(--blue);
+}
+.ss-flow .react-flow__handle {
+  width: 10px;
+  height: 10px;
+  border-width: 2px;
+}
+.ss-flow .react-flow__attribution a { color: var(--ink-3); }
