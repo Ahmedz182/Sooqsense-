@@ -9,6 +9,3 @@ next-env.d.ts
 .DS_Store
 npm-debug.log*
 .vercel
-
-# Local agent worktrees
-.claude/worktrees/
