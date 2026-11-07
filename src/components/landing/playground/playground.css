@@ -1,0 +1,37 @@
+/* React Flow, dressed in SooqSense tokens (both themes). */
+.pg-flow.react-flow,
+.pg-flow.react-flow.dark {
+  --xy-background-color: var(--bg-sunken);
+  --xy-background-pattern-color: var(--line-strong);
+  --xy-edge-stroke: var(--amber);
+  --xy-edge-stroke-selected: var(--amber-ink);
+  --xy-edge-stroke-width: 2;
+  --xy-connectionline-stroke: var(--amber);
+  --xy-edge-label-background-color: var(--bg-elev);
+  --xy-edge-label-color: var(--ink-2);
+  --xy-controls-button-background-color: var(--bg-elev);
+  --xy-controls-button-background-color-hover: var(--bg-sunken);
+  --xy-controls-button-color: var(--ink-2);
+  --xy-controls-button-color-hover: var(--ink);
+  --xy-controls-button-border-color: var(--line);
+  --xy-controls-box-shadow: var(--shadow-sm);
+  --xy-attribution-background-color: transparent;
+  font-family: var(--font-sans);
+}
+.pg-flow .react-flow__node-step {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.pg-flow .react-flow__controls {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.pg-flow .react-flow__controls-button {
+  width: 32px;
+  height: 32px;
+}
+.pg-flow .react-flow__attribution a {
+  color: var(--ink-3);
+}
