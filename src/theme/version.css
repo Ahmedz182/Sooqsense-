@@ -1,5 +1,69 @@
 /*
- * Per-version overrides. Each landing version (branch) may override any token
- * from tokens.css here — e.g. a different accent balance or radius — and every
- * page on the site picks it up automatically. Keep this file small.
+ * V3 — "Stack collapse → a team of agents".
+ * Cream / warm charcoal, with a blue + amber pairing:
+ *   blue  = the agents and the system
+ *   amber = you, and the decisions you make
+ * Every page reads these, so pricing, contact, legal and 404 follow automatically.
  */
+
+:root,
+[data-theme="light"] {
+  --bg: #f6f1e7;
+  --bg-elev: #fffcf6;
+  --bg-sunken: #eee6d7;
+  --bg-inverse: #1d1915;
+
+  --ink: #1b1813;
+  --ink-2: #47413a;
+  --ink-3: #675f53; /* 5.3:1 on --bg */
+
+  --line: #e2d8c7;
+  --line-strong: #cdbfaa;
+
+  --blue: #1f5fae;
+  --blue-hover: #1a529a;
+  --blue-ink: #1b4f91; /* blue text on cream — 7.4:1 */
+  --blue-soft: #dfe8f4;
+  --on-blue: #ffffff;
+
+  --wash-blue: rgb(31 95 174 / 0.08);
+  --wash-amber: rgb(232 150 47 / 0.14);
+  --card-edge: rgb(27 24 19 / 0.07);
+  --tilt-shadow: 0 30px 60px -28px rgb(40 30 15 / 0.35), 0 10px 24px -14px rgb(40 30 15 / 0.18);
+}
+
+[data-theme="dark"] {
+  --bg: #171410;
+  --bg-elev: #211d18;
+  --bg-sunken: #12100d;
+  --bg-inverse: #f6f1e7;
+
+  --ink: #f4eee3;
+  --ink-2: #cfc6b7;
+  --ink-3: #a09687; /* 6.3:1 on --bg */
+
+  --line: #322c25;
+  --line-strong: #453d33;
+
+  --blue: #86b9f0;
+  --blue-hover: #a1c9f4;
+  --blue-ink: #9cc6f4;
+  --blue-soft: #172a40;
+  --on-blue: #0c1726;
+
+  --wash-blue: rgb(134 185 240 / 0.08);
+  --wash-amber: rgb(240 165 74 / 0.12);
+  --card-edge: rgb(244 238 227 / 0.06);
+  --tilt-shadow: 0 30px 60px -28px rgb(0 0 0 / 0.75), 0 10px 24px -14px rgb(0 0 0 / 0.5);
+}
+
+:root {
+  --radius-lg: 18px;
+  --radius-xl: 26px;
+  --text-display: clamp(3rem, 1.4rem + 6.6vw, 7.5rem);
+}
+
+/* System labels speak in blue; decisions (amber) belong to the visitor. */
+.eyebrow {
+  color: var(--blue-ink);
+}

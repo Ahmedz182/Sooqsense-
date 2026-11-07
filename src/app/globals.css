@@ -25,6 +25,9 @@
   --color-mint-soft: var(--mint-soft);
   --color-blue: var(--blue);
   --color-blue-soft: var(--blue-soft);
+  --color-blue-ink: var(--blue-ink);
+  --color-blue-hover: var(--blue-hover);
+  --color-on-blue: var(--on-blue);
   --color-rose: var(--rose);
   --color-rose-soft: var(--rose-soft);
   --color-violet: var(--violet);
