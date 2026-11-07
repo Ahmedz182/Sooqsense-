@@ -110,3 +110,29 @@ Each version must ship every page above, light + dark, desktop + mobile, and a s
 - No horizontal overflow at 390 px; no console errors; Lighthouse-friendly (lazy-load heavy parts, `next/image`/SVG).
 - Contrast AA in both themes (use `--amber-ink` for amber text on light backgrounds).
 - Keyboard: every interactive node/control reachable and operable; visible focus.
+
+## 7. Craft — it must NOT look AI-generated
+
+Reference for *level of craft only* (not to copy): staging.artilence.com — same studio. What makes it feel
+hand-made: hero built from **real product fragments in 3D perspective** (tilted cards with specific data like
+"94.2%", "+$12,480.00", "Resolving ticket #482"), a **curved ribbon marquee** instead of a flat logo row,
+stats told **"one number at a time"** with a stepper + live chart, soft brand-colour washes instead of neon
+blobs, small floating tool tiles, live details (office local times), a searchable FAQ.
+
+**Avoid (instant "AI template" tells):**
+- Centered hero + gradient blob + 3 equal icon cards + "Features" grid + logo row + testimonial carousel.
+- Icons in coloured rounded squares repeated in grids; emoji; generic illustrations or stock photos.
+- Words: unlock, supercharge, revolutionize, seamless, elevate, empower, cutting-edge, game-changer, "in today's fast-paced world".
+- Purple/indigo gradients, glassmorphism everywhere, glowing borders on every card, identical card sizes, uniform section rhythm.
+- Gradient text on every heading; every section with an eyebrow + H2 + paragraph + grid.
+
+**Do:**
+- Build visuals from **real SooqSense UI fragments** with specific, believable data (names, times, amounts, email
+  subjects, deal stages) — e.g. "Mira opened the proposal twice · Tue 09:14", "Ahmed Fayyaz approved 3 drafts".
+- Vary layout rhythm: asymmetric editorial splits, full-bleed moments, a pinned scene, a quiet text-only beat.
+- Tactile micro-interactions: cards that tilt toward the cursor, magnetic primary button, nodes that snap with a
+  tiny spring, edges that draw on, a caret that types a draft, counters that tick.
+- Live, local details: "09:41 in New York · 14:41 in London · 15:41 in Berlin" style clocks; relative timestamps.
+- Human microcopy with a point of view, short sentences, a little wit ("Your CRM, minus the data entry.").
+- Custom SVG icons/marks for integrations drawn simply (wordmark-in-a-tile), not a random icon pack mash-up.
+- One signature motif per version that recurs subtly (e.g. the amber "next" dot, a connector line, a ribbon).
