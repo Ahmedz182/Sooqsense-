@@ -6,7 +6,9 @@ export function Footer() {
   return (
     <footer className="border-t border-line bg-bg-sunken">
       <div className="container-x grid gap-12 py-16 md:grid-cols-[1.4fr_repeat(3,1fr)]">
-        <div className="max-w-sm">
+        <div className="relative max-w-sm">
+          {/* Where the thread ties off. */}
+          <span className="absolute -top-16 left-[15px] h-12 w-[2px] rounded-full bg-amber" aria-hidden="true" />
           <Logo />
           <p className="mt-4 text-ink-2">
             The agentic CRM that turns your inbox, calendar and calls into workflows that run themselves — with you approving every send.

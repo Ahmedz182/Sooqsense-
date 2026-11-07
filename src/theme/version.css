@@ -1,5 +1,107 @@
 /*
- * Per-version overrides. Each landing version (branch) may override any token
- * from tokens.css here — e.g. a different accent balance or radius — and every
- * page on the site picks it up automatically. Keep this file small.
+ * V1 — "Ahmed's Tuesday" (deal story).
+ * Editorial and warm: a slightly deeper cream, warm charcoal, amber as the one
+ * accent, and an amber "thread" that ties the story together. Every page picks
+ * these up automatically.
  */
+
+:root,
+[data-theme="light"] {
+  --bg: #f8f4ec;
+  --bg-elev: #fffdf9;
+  --bg-sunken: #f0eadf;
+  --line: #e4dccd;
+  --line-strong: #cfc4b1;
+  --paper: #fbf8f2; /* card stock for "document" fragments */
+  --thread: var(--amber);
+  --thread-fade: rgb(232 150 47 / 0);
+}
+
+[data-theme="dark"] {
+  --bg: #17140f;
+  --bg-elev: #211d17;
+  --bg-sunken: #12100c;
+  --line: #312b23;
+  --line-strong: #443c31;
+  --paper: #1c1914;
+  --thread: var(--amber);
+  --thread-fade: rgb(240 165 74 / 0);
+}
+
+:root {
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --container: 1240px;
+}
+
+/* The thread: a soft-ended amber line. */
+.thread-line {
+  background: linear-gradient(to bottom, var(--thread-fade), var(--thread) 30%, var(--thread));
+}
+
+/* Eyebrows on every page carry a knot of the thread. */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.eyebrow::before {
+  content: "";
+  width: 1.5rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--thread);
+}
+
+/* Product fragments ("paper" cards) used across the site. */
+.paper {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+/* Soft brand wash for editorial moments — never a neon blob. */
+.wash-amber {
+  background:
+    radial-gradient(60% 50% at 80% 20%, color-mix(in oklab, var(--amber-soft) 85%, transparent), transparent 70%),
+    radial-gradient(40% 40% at 10% 90%, color-mix(in oklab, var(--amber-soft) 50%, transparent), transparent 70%);
+}
+
+.tabular { font-variant-numeric: tabular-nums; }
+
+/* Range input (pricing seat slider). */
+.range-amber {
+  appearance: none;
+  background: transparent;
+}
+.range-amber::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--amber) var(--fill, 50%), var(--line-strong) var(--fill, 50%));
+}
+.range-amber::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--amber) var(--fill, 50%), var(--line-strong) var(--fill, 50%));
+}
+.range-amber::-webkit-slider-thumb {
+  appearance: none;
+  width: 26px;
+  height: 26px;
+  margin-top: -10px;
+  border-radius: 999px;
+  background: var(--bg-elev);
+  border: 2px solid var(--amber);
+  box-shadow: var(--shadow-md);
+}
+.range-amber::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--bg-elev);
+  border: 2px solid var(--amber);
+  box-shadow: var(--shadow-md);
+}
