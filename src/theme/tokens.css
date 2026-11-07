@@ -1,0 +1,119 @@
+/*
+ * SooqSense design tokens — the single source of truth for colour, type, radius,
+ * shadow and motion. Every page and component reads these variables, so a landing
+ * version restyles the whole site by editing THIS file (or `version.css`) only.
+ *
+ * Palette lineage: sooqsense.com (warm cream, amber, mint/blue status tags) —
+ * re-tuned for WCAG AA in both themes and with far less pure black.
+ */
+
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+
+  /* surfaces */
+  --bg: #faf8f4;
+  --bg-elev: #ffffff;
+  --bg-sunken: #f3efe8;
+  --bg-inverse: #1f1b16;
+
+  /* text */
+  --ink: #1c1915;
+  --ink-2: #4a453d;
+  --ink-3: #6b6458; /* 5.4:1 on --bg */
+  --ink-inverse: #f6f2ea;
+
+  /* lines */
+  --line: #e6e0d6;
+  --line-strong: #d3cbbd;
+
+  /* brand */
+  --amber: #e8962f; /* fills, glows, buttons */
+  --amber-hover: #dd8820;
+  --amber-ink: #9a5806; /* amber TEXT on light — 5.6:1 */
+  --amber-soft: #fcecd6;
+  --on-amber: #1f1405;
+
+  /* status / accents */
+  --mint: #1d7f55;
+  --mint-soft: #dcf2e7;
+  --blue: #245f9e;
+  --blue-soft: #e1ecf8;
+  --rose: #b42318;
+  --rose-soft: #fde8e5;
+  --violet: #5f45b0;
+  --violet-soft: #ece6fa;
+
+  /* effects */
+  --shadow-sm: 0 1px 2px rgb(40 30 15 / 0.06), 0 1px 1px rgb(40 30 15 / 0.04);
+  --shadow-md: 0 8px 24px -8px rgb(40 30 15 / 0.14), 0 2px 6px rgb(40 30 15 / 0.05);
+  --shadow-lg: 0 32px 64px -24px rgb(40 30 15 / 0.22), 0 8px 20px -8px rgb(40 30 15 / 0.08);
+  --glow-amber: 0 12px 32px -8px rgb(232 150 47 / 0.45);
+  --grid-dot: rgb(28 25 21 / 0.08);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* warm charcoal, not black */
+  --bg: #16130f;
+  --bg-elev: #1f1b16;
+  --bg-sunken: #110f0c;
+  --bg-inverse: #faf8f4;
+
+  --ink: #f4efe6;
+  --ink-2: #cdc5b7;
+  --ink-3: #9d9486; /* 6.2:1 on --bg */
+  --ink-inverse: #1c1915;
+
+  --line: #2f2a23;
+  --line-strong: #3f382e;
+
+  --amber: #f0a54a;
+  --amber-hover: #f5b465;
+  --amber-ink: #f5b566;
+  --amber-soft: #3a2a15;
+  --on-amber: #1f1405;
+
+  --mint: #62d3a2;
+  --mint-soft: #15372a;
+  --blue: #7db6f2;
+  --blue-soft: #15293f;
+  --rose: #f59a8f;
+  --rose-soft: #3d1d19;
+  --violet: #b9a5f5;
+  --violet-soft: #2a2344;
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
+  --shadow-md: 0 8px 24px -8px rgb(0 0 0 / 0.5), 0 2px 6px rgb(0 0 0 / 0.25);
+  --shadow-lg: 0 32px 64px -24px rgb(0 0 0 / 0.6), 0 8px 20px -8px rgb(0 0 0 / 0.3);
+  --glow-amber: 0 12px 36px -8px rgb(240 165 74 / 0.35);
+  --grid-dot: rgb(244 239 230 / 0.07);
+}
+
+:root {
+  /* type scale (fluid) */
+  --text-display: clamp(2.75rem, 1.6rem + 5.2vw, 6.25rem);
+  --text-h1: clamp(2.25rem, 1.5rem + 3.4vw, 4.5rem);
+  --text-h2: clamp(1.875rem, 1.35rem + 2.3vw, 3.5rem);
+  --text-h3: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
+  --text-lead: clamp(1.0625rem, 1rem + 0.35vw, 1.3125rem);
+
+  /* radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  /* layout */
+  --container: 1200px;
+  --gutter: clamp(16px, 4vw, 32px);
+  --header-h: 68px;
+
+  /* motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 160ms;
+  --dur: 320ms;
+  --dur-slow: 640ms;
+}
