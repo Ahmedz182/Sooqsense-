@@ -1,14 +1,13 @@
-import { owner } from "@/config/demo";
 
 /**
  * Faces for the product mock-ups. Stock portraits (public/images/CREDITS.md) are used
  * ONLY as illustrative avatars inside the product UI — never next to testimonials.
- * Ahmed Fayyaz is a real person and uses his own supplied photo (owner.photo).
+ * Ahmed Fayyaz is a real person: his own photo appears in only two places (the hero
+ * inbox and the founder note). Everywhere else he is shown as "AF" initials.
  */
 const p = (n: number) => `/images/people/person-${String(n).padStart(2, "0")}.webp`;
 
 export const photoOf: Record<string, string> = {
-  [owner.name]: owner.photo,
   "Mira Haddad": p(1),
   "James Whitfield": p(2),
   "Lena Brandt": p(3),

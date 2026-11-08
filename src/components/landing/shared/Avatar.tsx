@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { cn } from "@/lib/cn";
+import { owner } from "@/config/demo";
 import { initialsOf, photoOf } from "./people";
 
 const sizes = { xs: "h-6 w-6 text-[0.6rem]", sm: "h-8 w-8 text-[0.7rem]", md: "h-10 w-10 text-xs", lg: "h-14 w-14 text-base", xl: "h-20 w-20 text-xl" };
@@ -18,17 +19,21 @@ const tones = {
 export function Avatar({
   initials,
   name,
+  photo: explicitPhoto,
   size = "sm",
   tone = "neutral",
   className,
 }: {
   initials?: string;
   name?: string;
+  /** Force a specific photo (used for Ahmed's own photo in the hero only). */
+  photo?: string;
   size?: keyof typeof sizes;
   tone?: keyof typeof tones;
   className?: string;
 }) {
-  const photo = name ? photoOf[name] : undefined;
+  const photo = explicitPhoto ?? (name ? photoOf[name] : undefined);
+  if (!photo && name === owner.name && tone === "neutral") tone = "amber";
   if (photo)
     return (
       <img

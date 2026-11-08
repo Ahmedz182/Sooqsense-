@@ -21,7 +21,7 @@ function Sidebar() {
   return (
     <aside className="hidden flex-col border-r border-line bg-window-pane p-3 lg:flex">
       <div className="flex items-center gap-2.5 px-2 py-2">
-        <Avatar name={owner.name} />
+        <Avatar name={owner.name} photo={owner.photo} />
         <div className="min-w-0">
           <p className="truncate text-sm font-medium text-ink">{owner.name}</p>
           <p className="truncate text-[0.7rem] text-ink-3">{owner.email}</p>
