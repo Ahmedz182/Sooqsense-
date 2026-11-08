@@ -1,6 +1,8 @@
 import { SiteShell } from "@/components/layout/SiteShell";
 import { Hero } from "@/components/landing/hero/Hero";
 import { Story } from "@/components/landing/story/Story";
+import { Outcomes } from "@/components/landing/outcomes/Outcomes";
+import { Account } from "@/components/landing/account/Account";
 import { Meetings } from "@/components/landing/meetings/Meetings";
 import { Campaigns } from "@/components/landing/campaigns/Campaigns";
 import { Workflows } from "@/components/landing/workflows/Workflows";
@@ -16,6 +18,8 @@ export default function HomePage() {
     <SiteShell>
       <Hero />
       <Story />
+      <Outcomes />
+      <Account />
       <Meetings />
       <Campaigns />
       <Workflows />

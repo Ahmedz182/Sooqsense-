@@ -1,12 +1,24 @@
 import { nodeCatalog, type NodeKind } from "@/config/demo";
 
 export type PStep = { id: string; kind: NodeKind; option: string; note?: string };
-export type Template = { id: string; name: string; steps: PStep[]; fork?: [PStep, PStep] };
+export type Template = { id: string; name: string; steps: PStep[]; fork?: [PStep, PStep]; after?: PStep };
 
 let n = 0;
 const s = (kind: NodeKind, option: string, note?: string): PStep => ({ id: `t${++n}`, kind, option, note });
 
 export const templates: Template[] = [
+  {
+    id: "outbound",
+    name: "Outbound list",
+    steps: [
+      s("source", "Apify · LinkedIn profile scraper", "Owner: Ahmed Fayyaz"),
+      s("enrich", "Funding & headcount"),
+      s("ai", "Score against ICP"),
+      s("branch", "If score ≥ 80"),
+    ],
+    fork: [s("campaign", "Instantly · cold email campaign", "Yes"), s("action", "Update HubSpot", "No")],
+    after: s("notify", "Slack #sales"),
+  },
   {
     id: "inbound",
     name: "Inbound lead",
@@ -18,17 +30,6 @@ export const templates: Template[] = [
       s("branch", "If score ≥ 80"),
     ],
     fork: [s("action", "Send report to client", "Yes"), s("campaign", "Add to nurture sequence", "No")],
-  },
-  {
-    id: "outbound",
-    name: "Outbound list",
-    steps: [
-      s("source", "Apify · Google Maps leads"),
-      s("enrich", "Funding & headcount"),
-      s("ai", "Score against ICP"),
-      s("campaign", "Instantly · cold email campaign", "Approved by Ahmed"),
-      s("notify", "Slack #sales"),
-    ],
   },
   {
     id: "followup",

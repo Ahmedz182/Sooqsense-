@@ -1,16 +1,18 @@
 import { nodeCatalog, type NodeKind } from "@/config/demo";
 import type { IntegrationId } from "../shared/BrandLogo";
 
-export type FlowNode = { id: string; kind: NodeKind; option: string; branch?: "Yes" | "No" };
+export type RunState = "done" | "running" | "waiting" | "skipped";
+export type FlowNode = { id: string; kind: NodeKind; option: string; branch?: "Yes" | "No" | "Always"; state: RunState; owner?: string; detail?: string };
 
 /** A small inbound flow: few nodes, one branch. Options come from nodeCatalog. */
 export const initialFlow: FlowNode[] = [
-  { id: "n1", kind: "trigger", option: "New email from lead" },
-  { id: "n2", kind: "source", option: "Apify · LinkedIn company scraper" },
-  { id: "n3", kind: "ai", option: "Score against ICP" },
-  { id: "n4", kind: "branch", option: "If score ≥ 80" },
-  { id: "n5", kind: "action", option: "Send email (after approval)", branch: "Yes" },
-  { id: "n6", kind: "campaign", option: "Instantly · cold email campaign", branch: "No" },
+  { id: "n1", kind: "trigger", option: "New email from lead", state: "done", owner: "Ahmed Fayyaz", detail: "Mira Haddad · 09:12" },
+  { id: "n2", kind: "source", option: "Apify · LinkedIn company scraper", state: "done", detail: "140 staff · Series B" },
+  { id: "n3", kind: "ai", option: "Score against ICP", state: "done", detail: "Scored 86" },
+  { id: "n4", kind: "branch", option: "If score ≥ 80", state: "done", detail: "Yes" },
+  { id: "n5", kind: "action", option: "Send email (after approval)", branch: "Yes", state: "waiting", owner: "Ahmed Fayyaz", detail: "Waiting for Ahmed" },
+  { id: "n6", kind: "campaign", option: "Instantly · cold email campaign", branch: "No", state: "skipped", detail: "Not needed" },
+  { id: "n7", kind: "notify", option: "Slack #sales", branch: "Always", state: "running", detail: "Posting…" },
 ];
 
 export const optionsOf = (kind: NodeKind) => nodeCatalog.find((c) => c.kind === kind)?.options ?? [];
@@ -26,6 +28,7 @@ export function logoFor(option: string): IntegrationId | null {
   if (o.includes("salesforce")) return "salesforce";
   if (o.includes("slack")) return "slack";
   if (o.includes("linkedin")) return "linkedin";
+  if (o.includes("email")) return "gmail";
   return null;
 }
 

@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { siteConfig } from "@/config/site";
 import { TrialButton } from "@/components/ui/TrialButton";
 import { cn } from "@/lib/cn";
-import { SectionHead } from "../shared/SectionHead";
+import { Em, SectionHead } from "../shared/SectionHead";
 import { TapBuilder } from "./TapBuilder";
 import { templates } from "./templates";
 
@@ -45,10 +45,10 @@ export function Playground() {
   }, []);
 
   return (
-    <section id="playground" aria-labelledby="pg-title" className="scroll-mt-[var(--header-h)] border-t border-line py-16 md:py-28">
+    <section id="playground" data-theme="dark" aria-labelledby="pg-title" className="scroll-mt-[var(--header-h)] bg-bg-sunken py-16 text-ink md:py-28">
       <div className="container-x">
-        <SectionHead id="pg-title" title="Now make your own.">
-          Start from a template. Swap a step, add one, connect it differently.
+        <SectionHead id="pg-title" title={<>Now make your <Em>own</Em>.</>}>
+          Press Test run to watch a workflow work. Then drag a step, swap one, or connect it differently.
         </SectionHead>
 
         <div role="tablist" aria-label="Workflow templates" className="mt-10 flex flex-wrap gap-2">
@@ -73,7 +73,7 @@ export function Playground() {
           {mode === "tap" ? (
             <TapBuilder template={template} />
           ) : (
-            <div className="h-[520px] overflow-hidden rounded-[var(--radius-xl)] border border-line">
+            <div className="h-[560px] overflow-hidden rounded-[var(--radius-xl)] border border-line shadow-window">
               {mode === "canvas" && near ? <Canvas template={template} /> : <CanvasSkeleton />}
             </div>
           )}

@@ -2,14 +2,14 @@
 
 import { memo } from "react";
 import { Handle, Position, useReactFlow, type Node, type NodeProps } from "@xyflow/react";
-import { ChevronDown } from "lucide-react";
+import { Check, ChevronDown, Loader2 } from "lucide-react";
 import type { NodeKind } from "@/config/demo";
 import { cn } from "@/lib/cn";
 import { BrandLogo } from "../shared/BrandLogo";
 import { kindDot, logoFor } from "../workflows/flow";
 import { labelOf, optionsOf } from "./templates";
 
-export type StepData = { kind: NodeKind; option: string; note?: string };
+export type StepData = { kind: NodeKind; option: string; note?: string; run?: "running" | "done" };
 export type StepNodeType = Node<StepData, "step">;
 
 /** Canvas node: kind + an option picker right on the node. */
@@ -20,7 +20,7 @@ export const StepNode = memo(function StepNode({ id, data, selected }: NodeProps
     <div
       className={cn(
         "w-[220px] rounded-[var(--radius-md)] border bg-bg-elev px-3 py-2.5 transition-[border-color,box-shadow]",
-        selected ? "border-amber shadow-[0_0_0_4px_var(--amber-soft)]" : "border-line-strong shadow-sm",
+        selected || data.run === "running" ? "border-amber shadow-[0_0_0_4px_var(--amber-soft)]" : data.run === "done" ? "border-mint" : "border-line-strong shadow-sm",
       )}
     >
       <Handle type="target" position={Position.Left} className="!h-2.5 !w-2.5 !border-2 !border-bg-elev !bg-amber" />
@@ -29,6 +29,8 @@ export const StepNode = memo(function StepNode({ id, data, selected }: NodeProps
           <span className={cn("h-1.5 w-1.5 shrink-0 rounded-full", kindDot[data.kind])} aria-hidden="true" />
           <span className="truncate">{labelOf(data.kind)}</span>
         </span>
+        {data.run === "running" && <Loader2 className="h-3.5 w-3.5 shrink-0 animate-spin text-amber-ink" aria-label="Running" />}
+        {data.run === "done" && <Check className="h-3.5 w-3.5 shrink-0 text-mint" aria-label="Done" />}
       </div>
       <label className="relative mt-1.5 flex items-center gap-2">
         {logo && <BrandLogo id={logo} size="xs" decorative />}

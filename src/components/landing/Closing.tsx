@@ -5,7 +5,10 @@ import { plans } from "@/config/pricing";
 import { siteConfig } from "@/config/site";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { FaqSearch } from "@/components/ui/FaqSearch";
-import { TrialButton } from "@/components/ui/TrialButton";
+import { ButtonLink } from "@/components/ui/Button";
+import { owner } from "@/config/demo";
+import { Avatar } from "./shared/Avatar";
+import { BrandLogo, type IntegrationId } from "./shared/BrandLogo";
 import { SectionHead } from "./shared/SectionHead";
 
 const usd = (n: number) => `$${n}`;
@@ -13,7 +16,7 @@ const usd = (n: number) => `$${n}`;
 /** Three plans from config, one link to the full page. */
 export function PricingTeaser() {
   return (
-    <section id="pricing" aria-labelledby="pricing-title" className="scroll-mt-[var(--header-h)] border-t border-line py-16 md:py-28">
+    <section id="pricing" aria-labelledby="pricing-title" className="scroll-mt-[var(--header-h)] py-16 md:py-28">
       <div className="container-x">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <SectionHead id="pricing-title" title="Simple, per-seat pricing.">
@@ -48,7 +51,7 @@ export function PricingTeaser() {
 
 export function Faq() {
   return (
-    <section id="faq" aria-labelledby="faq-title" className="scroll-mt-[var(--header-h)] border-t border-line py-16 md:py-28">
+    <section id="faq" data-theme="dark" aria-labelledby="faq-title" className="scroll-mt-[var(--header-h)] bg-bg-sunken py-16 text-ink md:py-28">
       <div className="container-x grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
         <SectionHead id="faq-title" title="Questions, answered.">
           Can&rsquo;t find yours?{" "}
@@ -62,25 +65,60 @@ export function Faq() {
   );
 }
 
+const morning: { logo: IntegrationId; who: string; text: string }[] = [
+  { logo: "gmail", who: "Mira Haddad", text: "Follow-up to Mira, recap and next steps" },
+  { logo: "hubspot", who: "Owen Price", text: "Carthage Labs moved to Proposal sent" },
+  { logo: "instantly", who: "James Whitfield", text: "3 replies from last night’s sequence" },
+];
+
+/** Tomorrow morning, in one card: what SooqSense prepared while you were away. */
+function MorningQueue() {
+  return (
+    <div className="rounded-[var(--radius-xl)] border border-line bg-bg-elev p-5 text-ink shadow-window sm:p-6" aria-hidden="true">
+      <div className="flex items-center gap-3">
+        <Avatar name={owner.name} size="lg" />
+        <div>
+          <p className="font-semibold tracking-tight">Good morning, {owner.firstName}</p>
+          <p className="text-sm text-ink-3">Tomorrow, 08:00 · ready to approve</p>
+        </div>
+      </div>
+      <ul className="mt-5 space-y-2.5">
+        {morning.map((m) => (
+          <li key={m.text} className="flex items-center gap-3 rounded-[var(--radius-md)] border border-line bg-window p-3">
+            <BrandLogo id={m.logo} size="sm" decorative />
+            <p className="min-w-0 flex-1 text-sm leading-snug">{m.text}</p>
+            <Avatar name={m.who} size="xs" />
+            <span className="hidden h-8 shrink-0 items-center rounded-full bg-amber px-3 text-xs font-medium text-on-amber sm:inline-flex">Approve</span>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-4 text-xs text-ink-3">CRM updated overnight · nothing sent without you</p>
+    </div>
+  );
+}
+
 export function FinalCta() {
   return (
-    <section aria-labelledby="cta-title" className="bg-bg-sunken py-16 md:py-28">
-      <div className="container-x grid grid-cols-1 items-center gap-12 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-20">
+    <section aria-labelledby="cta-title" className="bg-amber py-16 text-on-amber md:py-24">
+      <div className="container-x grid grid-cols-1 items-center gap-12 lg:grid-cols-[minmax(0,6fr)_minmax(0,6fr)] lg:gap-16">
         <div>
-          <h2 id="cta-title" className="text-h1 font-semibold text-ink">
+          <h2 id="cta-title" className="text-h1 font-semibold text-on-amber">
             Start with your inbox.
           </h2>
-          <p className="text-lead mt-4 max-w-lg text-ink-2">Connect Gmail or Outlook in a minute. Tomorrow morning, your first follow-ups are ready to approve.</p>
+          <p className="text-lead mt-4 max-w-lg text-on-amber/85">Connect Gmail or Outlook in a minute. Tomorrow morning, your first follow-ups are ready to approve.</p>
           <div className="mt-8 flex flex-col items-start gap-2">
-            <TrialButton />
-            <span className="text-sm text-ink-3">{siteConfig.trial.note}</span>
+            <ButtonLink href={siteConfig.appUrl} size="lg" variant="inverse" data-cta="trial">
+              {siteConfig.trial.label} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </ButtonLink>
+            <span className="text-sm text-on-amber/80">{siteConfig.trial.note}</span>
+          </div>
+          <div className="mt-10 max-w-md rounded-[var(--radius-xl)] bg-bg-elev p-5 text-ink sm:p-6">
+            <h3 className="text-base font-medium tracking-normal text-ink">Not ready yet?</h3>
+            <p className="mt-1 text-sm text-ink-2">Join the waitlist and we&rsquo;ll send one email when your workspace is ready.</p>
+            <LeadForm intent="waitlist" compact className="mt-4" />
           </div>
         </div>
-        <div className="rounded-[var(--radius-xl)] border border-line bg-bg-elev p-6 sm:p-7">
-          <h3 className="text-base font-medium tracking-normal text-ink">Not ready yet?</h3>
-          <p className="mt-1 text-sm text-ink-2">Join the waitlist and we&rsquo;ll send one email when your workspace is ready.</p>
-          <LeadForm intent="waitlist" compact className="mt-5" />
-        </div>
+        <MorningQueue />
       </div>
     </section>
   );

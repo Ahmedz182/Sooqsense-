@@ -52,11 +52,13 @@ function StepRow({ step, onChange, onRemove }: { step: PStep; onChange: (o: stri
 export function TapBuilder({ template }: { template: Template }) {
   const [steps, setSteps] = useState<PStep[]>(template.steps);
   const [fork, setFork] = useState(template.fork);
+  const [after, setAfter] = useState(template.after);
   const [insertAt, setInsertAt] = useState<number | null>(null);
 
   useEffect(() => {
     setSteps(template.steps);
     setFork(template.fork);
+    setAfter(template.after);
     setInsertAt(null);
   }, [template]);
 
@@ -108,8 +110,13 @@ export function TapBuilder({ template }: { template: Template }) {
           ))}
         </div>
       )}
+      {after && (
+        <div className="mt-2">
+          <StepRow step={after} onChange={(o) => setAfter({ ...after, option: o })} />
+        </div>
+      )}
       <p className="mt-3 px-1 text-xs text-ink-3">
-        {steps.length + (fork?.length ?? 0)} steps · tap a step to change it
+        {steps.length + (fork?.length ?? 0) + (after ? 1 : 0)} steps · tap a step to change it
       </p>
     </div>
   );
