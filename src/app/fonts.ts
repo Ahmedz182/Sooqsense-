@@ -80,6 +80,7 @@ const helvetica = { variable: "font-helvetica" } as const;
 const brandFonts = { geist, general: generalSans, instrument: instrumentSans, satoshi, poppins, raleway, helvetica } as const;
 export type BrandFont = keyof typeof brandFonts;
 
+/** Default: Geist — picked over Poppins, Helvetica and Raleway in the round 2 comparison (docs/screenshots/v4-apple-story/fonts). */
 const choice = (process.env.NEXT_PUBLIC_FONT || "geist") as BrandFont;
 export const brand = brandFonts[choice] ?? geist;
 
