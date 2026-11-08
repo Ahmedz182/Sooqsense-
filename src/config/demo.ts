@@ -33,18 +33,20 @@ export const people: DemoPerson[] = [
 
 /** Integration catalogue shown in mock-ups and the integrations section. */
 export const integrations = [
-  { id: "gmail", name: "Gmail", category: "Email" },
-  { id: "outlook", name: "Outlook", category: "Email" },
-  { id: "gcal", name: "Google Calendar", category: "Calendar" },
-  { id: "zoom", name: "Zoom", category: "Meetings" },
-  { id: "meet", name: "Google Meet", category: "Meetings" },
-  { id: "hubspot", name: "HubSpot", category: "CRM" },
-  { id: "salesforce", name: "Salesforce", category: "CRM" },
-  { id: "slack", name: "Slack", category: "Team" },
-  { id: "linkedin", name: "LinkedIn", category: "Prospecting" },
-  { id: "mailchimp", name: "Mailchimp", category: "Campaigns" },
-  { id: "sheets", name: "Google Sheets", category: "Data" },
-  { id: "webhooks", name: "Webhooks & API", category: "Developer" },
+  { id: "gmail", name: "Gmail", category: "Email", logo: "/logos/gmail.svg" },
+  { id: "outlook", name: "Outlook", category: "Email", logo: "/logos/microsoft-outlook.svg" },
+  { id: "gcal", name: "Google Calendar", category: "Calendar", logo: "/logos/google-calendar.svg" },
+  { id: "zoom", name: "Zoom", category: "Meetings", logo: "/logos/zoom.svg" },
+  { id: "meet", name: "Google Meet", category: "Meetings", logo: "/logos/google-meet.svg" },
+  { id: "teams", name: "Microsoft Teams", category: "Meetings", logo: "/logos/microsoft-teams.svg" },
+  { id: "hubspot", name: "HubSpot", category: "CRM", logo: "/logos/hubspot.svg" },
+  { id: "salesforce", name: "Salesforce", category: "CRM", logo: "/logos/salesforce.svg" },
+  { id: "slack", name: "Slack", category: "Team", logo: "/logos/slack.svg" },
+  { id: "linkedin", name: "LinkedIn", category: "Prospecting", logo: "/logos/linkedin.svg" },
+  { id: "mailchimp", name: "Mailchimp", category: "Campaigns", logo: "/logos/mailchimp.svg" },
+  { id: "sheets", name: "Google Sheets", category: "Data", logo: "/logos/google-sheets.svg" },
+  { id: "notion", name: "Notion", category: "Docs", logo: "/logos/notion.svg" },
+  { id: "webhooks", name: "Webhooks & API", category: "Developer", logo: null },
 ] as const;
 
 /** Workflow node catalogue — shared vocabulary for builders and playgrounds. */
