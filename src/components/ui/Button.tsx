@@ -9,15 +9,15 @@ const base =
   "group inline-flex items-center justify-center gap-2 rounded-full font-medium whitespace-nowrap transition-[background,color,box-shadow,transform] duration-200 ease-out active:scale-[0.98] disabled:opacity-60 disabled:pointer-events-none";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-amber text-on-amber shadow-[var(--glow-amber)] hover:bg-amber-hover",
-  secondary: "bg-bg-elev text-ink border border-line-strong hover:border-ink-3 shadow-sm",
-  ghost: "text-ink-2 hover:text-ink hover:bg-bg-sunken",
+  primary: "bg-amber text-on-amber hover:bg-amber-hover",
+  secondary: "bg-bg-elev text-ink border border-line-strong hover:border-ink-3",
+  ghost: "text-ink hover:bg-bg-sunken",
 };
 
 const sizes: Record<Size, string> = {
-  sm: "h-9 px-4 text-sm",
-  md: "h-11 px-5 text-[0.95rem]",
-  lg: "h-13 px-7 text-base min-h-[52px]",
+  sm: "h-10 px-4 text-sm",
+  md: "h-11 px-5 text-[0.9375rem]",
+  lg: "h-12 px-6 text-[0.9375rem]",
 };
 
 export function buttonClass(variant: Variant = "primary", size: Size = "md", className?: string) {

@@ -1,5 +1,36 @@
 /*
- * Per-version overrides. Each landing version (branch) may override any token
- * from tokens.css here — e.g. a different accent balance or radius — and every
- * page on the site picks it up automatically. Keep this file small.
+ * Per-version overrides — v4 "Apple story".
+ * Calm, restrained type; neutral surfaces for product windows and logo tiles.
  */
+
+:root,
+[data-theme="light"] {
+  --window: #ffffff;
+  --window-bar: #f7f4ef;
+  --window-pane: #fbf9f6;
+  --logo-tile: #ffffff;
+  /* Mailchimp's yellow mark needs a dark tile to read on cream. */
+  --logo-tile-contrast: #24201a;
+  --marker: #fdefd9;
+  --shadow-window: 0 1px 0 rgb(40 30 15 / 0.04), 0 30px 60px -30px rgb(40 30 15 / 0.28), 0 12px 24px -12px rgb(40 30 15 / 0.08);
+}
+
+[data-theme="dark"] {
+  --window: #1e1a16;
+  --window-bar: #25211b;
+  --window-pane: #1a1713;
+  --logo-tile: #28231d;
+  --logo-tile-contrast: #28231d;
+  --marker: #3d2c16;
+  --shadow-window: 0 1px 0 rgb(255 255 255 / 0.03) inset, 0 30px 60px -30px rgb(0 0 0 / 0.7), 0 12px 24px -12px rgb(0 0 0 / 0.4);
+}
+
+:root {
+  /* Display tops out at 60px so the hero headline holds one line at 1440px. */
+  --text-display: clamp(2rem, 1.3rem + 2.9vw, 3.75rem);
+  --text-h1: clamp(2rem, 1.55rem + 1.9vw, 3.25rem);
+  --text-h2: clamp(1.75rem, 1.45rem + 1.25vw, 2.5rem);
+  --text-h3: clamp(1.125rem, 1.07rem + 0.25vw, 1.3125rem);
+  --text-lead: clamp(1.0625rem, 1.02rem + 0.2vw, 1.1875rem);
+  --header-h: 64px;
+}

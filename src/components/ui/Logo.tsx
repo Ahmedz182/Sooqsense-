@@ -19,7 +19,7 @@ export function LogoMark({ className }: { className?: string }) {
 
 export function Logo({ className }: { className?: string }) {
   return (
-    <Link href="/" aria-label="SooqSense home" className={cn("inline-flex items-center gap-2.5", className)}>
+    <Link href="/" aria-label="SooqSense home" className={cn("inline-flex min-h-11 items-center gap-2.5", className)}>
       <LogoMark />
       <span className="font-display text-[1.2rem] font-semibold tracking-tight text-ink">sooqsense</span>
     </Link>

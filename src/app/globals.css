@@ -29,6 +29,11 @@
   --color-rose-soft: var(--rose-soft);
   --color-violet: var(--violet);
   --color-violet-soft: var(--violet-soft);
+  --color-window: var(--window);
+  --color-window-bar: var(--window-bar);
+  --color-window-pane: var(--window-pane);
+  --color-logo-tile: var(--logo-tile);
+  --color-marker: var(--marker);
 
   --font-display: var(--font-brand), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-brand), ui-sans-serif, system-ui, sans-serif;
@@ -62,8 +67,9 @@
   h1, h2, h3, h4 {
     font-family: var(--font-display);
     font-weight: 600;
-    letter-spacing: -0.025em;
-    line-height: 1.08;
+    letter-spacing: -0.022em;
+    line-height: 1.1;
+    color: var(--ink);
     text-wrap: balance;
   }
   p { text-wrap: pretty; }
@@ -98,10 +104,70 @@
     text-transform: uppercase;
     color: var(--amber-ink);
   }
+  .tabular { font-variant-numeric: tabular-nums; }
+  .shadow-window { box-shadow: var(--shadow-window); }
   .bg-dots {
     background-image: radial-gradient(var(--grid-dot) 1px, transparent 1px);
     background-size: 22px 22px;
   }
+}
+
+/* Seat slider */
+.range-amber {
+  appearance: none;
+  background: transparent;
+}
+.range-amber::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--amber) var(--fill, 0%), var(--line-strong) var(--fill, 0%));
+}
+.range-amber::-moz-range-track {
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--amber) var(--fill, 0%), var(--line-strong) var(--fill, 0%));
+}
+.range-amber::-webkit-slider-thumb {
+  appearance: none;
+  margin-top: -10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line-strong);
+  box-shadow: var(--shadow-md);
+}
+.range-amber::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line-strong);
+  box-shadow: var(--shadow-md);
+}
+
+/*
+ * Motion-only layouts. The pinned story stage exists only on wide screens with
+ * motion allowed; everyone else (phones, reduced motion, screenshots) gets the
+ * stacked chapters, each in its complete final state.
+ */
+.motion-stage { display: none; }
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .motion-stage { display: block; }
+  .motion-stacked { display: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-tilt {
+    transform: perspective(1800px) rotateX(16deg) scale(0.94);
+    transform-origin: 50% 0%;
+  }
+  .arrive {
+    animation: arrive 900ms var(--ease-out) 700ms both;
+  }
+}
+@keyframes arrive {
+  from { opacity: 0; transform: translateY(-10px); max-height: 0; }
+  to { opacity: 1; transform: none; max-height: 120px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

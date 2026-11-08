@@ -30,31 +30,31 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-[background,border-color,backdrop-filter] duration-300",
+        "fixed inset-x-0 top-0 z-50 transition-[background,border-color] duration-300",
         scrolled || open
-          ? "border-b border-line bg-[color-mix(in_oklab,var(--bg)_82%,transparent)] backdrop-blur-xl"
+          ? "border-b border-line bg-[color-mix(in_oklab,var(--bg)_86%,transparent)] backdrop-blur-xl backdrop-saturate-150"
           : "border-b border-transparent",
       )}
     >
       <div className="container-x flex h-[var(--header-h)] items-center justify-between gap-6">
         <Logo />
-        <nav aria-label="Primary" className="hidden items-center gap-1 md:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-0.5 md:flex">
           {siteConfig.nav.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-full px-3.5 py-2 text-[0.94rem] text-ink-2 transition-colors hover:bg-bg-sunken hover:text-ink"
+              className="rounded-full px-3.5 py-2 text-sm text-ink-2 transition-colors hover:text-ink"
             >
               {item.label}
             </Link>
           ))}
         </nav>
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="hidden items-center gap-1 md:flex">
           <ThemeToggle />
-          <a href={siteConfig.appUrl} className="rounded-full px-3.5 py-2 text-[0.94rem] text-ink-2 hover:text-ink">
+          <a href={siteConfig.appUrl} className="rounded-full px-3.5 py-2 text-sm text-ink-2 transition-colors hover:text-ink">
             Sign in
           </a>
-          <TrialButton size="sm" />
+          <TrialButton size="sm" arrow={false} className="ml-1" />
         </div>
         <div className="flex items-center gap-1 md:hidden">
           <ThemeToggle />
@@ -73,7 +73,7 @@ export function Header() {
       <div
         id="mobile-nav"
         hidden={!open}
-        className="container-x h-[calc(100dvh-var(--header-h))] overflow-y-auto pb-10 pt-4 md:hidden"
+        className="container-x h-[calc(100dvh-var(--header-h))] overflow-y-auto pb-10 pt-2 md:hidden"
       >
         <nav aria-label="Mobile" className="flex flex-col">
           {siteConfig.nav.map((item) => (
@@ -81,12 +81,12 @@ export function Header() {
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
-              className="border-b border-line py-4 font-display text-2xl text-ink"
+              className="flex min-h-14 items-center border-b border-line text-xl font-medium text-ink"
             >
               {item.label}
             </Link>
           ))}
-          <a href={siteConfig.appUrl} className="border-b border-line py-4 font-display text-2xl text-ink-2">
+          <a href={siteConfig.appUrl} className="flex min-h-14 items-center border-b border-line text-xl font-medium text-ink-2">
             Sign in
           </a>
         </nav>
