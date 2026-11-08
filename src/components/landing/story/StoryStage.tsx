@@ -7,6 +7,24 @@ import { screening } from "../shared/deal";
 import { gsap, useScene } from "../shared/useScene";
 import { chapters } from "./chapters";
 import { DraftCard, EmailMessage, EnrichCard, HubSpotCard, LeadCard, ScreenCard } from "./cards";
+import { BrandLogo } from "../shared/BrandLogo";
+
+/** What SooqSense already knew about the account — fills the pane before the draft arrives. */
+const history = [
+  { logo: "linkedin" as const, text: "Connected with Mira on LinkedIn", when: "Oct 12" },
+  { logo: "zoom" as const, text: "Mira joined the RevOps webinar", when: "Oct 28" },
+  { logo: "hubspot" as const, text: "Visited the pricing page 3 times", when: "Today" },
+];
+
+/** What the draft was written from (chapter 4). */
+const draftContext = [
+  { logo: "hubspot" as const, text: "Growth plan · 12 seats, yearly" },
+  { logo: "gcal" as const, text: "Free Thu 2pm ET on Ahmed's calendar" },
+  { logo: "notion" as const, text: "HubSpot sync guide" },
+];
+
+/** SooqSense's run for this lead — ticks off chapter by chapter. */
+const steps = ["Enrich", "Screen", "Score", "Draft", "Approve"];
 
 const SUMMARY_H = 44; // collapsed rail card: 36px row + 8px gap
 
@@ -52,12 +70,16 @@ export function StoryStage() {
     gsap.set(texts[0], { autoAlpha: 1, y: 0 });
     gsap.set(segs, { scaleY: 0, transformOrigin: "50% 0%" });
     gsap.set(card("lead"), { height: fullH("lead") });
-    gsap.set([card("apify"), card("screen"), card("hubspot")], { height: 0 });
+    gsap.set([card("apify"), card("screen"), card("context"), card("hubspot")], { height: 0 });
+    gsap.set(card("queued"), { height: fullH("queued") });
     gsap.set(draftSheet, { yPercent: 112, autoAlpha: 1 });
     gsap.set(lines, { clipPath: "inset(0 100% 0 0)" });
     gsap.set(q("[data-score-bar]"), { scaleX: 0 });
     gsap.set(q("[data-sent-row]"), { autoAlpha: 0 });
     scoreNum.textContent = "0";
+    const stepEls = q("[data-step]");
+    const stepDots = q("[data-step-dot]");
+    gsap.set(stepEls, { color: "var(--ink-3)" });
 
     const tl = gsap.timeline({
       defaults: { ease: "none" },
@@ -88,8 +110,9 @@ export function StoryStage() {
     };
     const expand = (n: string, at: number) => tl.to(card(n), { height: () => fullH(n), duration: 0.24 }, at);
 
-    // 2 — enriched.
+    // 2 — enriched (the queued step becomes the real Apify card).
     collapse("lead", 0.92);
+    tl.to(card("queued"), { height: 0, autoAlpha: 0, duration: 0.16 }, 0.9);
     expand("apify", 1.0);
     // 3 — screened and scored.
     collapse("apify", 1.92);
@@ -98,14 +121,24 @@ export function StoryStage() {
     tl.to(score, { v: screening.score, duration: 0.4, onUpdate: () => (scoreNum.textContent = String(Math.round(score.v))) }, 2.2);
     // 4 — the reply writes itself.
     collapse("screen", 2.92);
-    tl.to(draftSheet, { yPercent: 0, duration: 0.24, ease: "power2.out" }, 3.0);
-    lines.forEach((l, i) => tl.to(l, { clipPath: "inset(0 0% 0 0)", duration: 0.12 }, 3.22 + i * 0.12));
+    expand("context", 3.0);
+    tl.to(q("[data-history]"), { autoAlpha: 0, y: 12, duration: 0.14 }, 2.94);
+    tl.to(draftSheet, { yPercent: 0, duration: 0.22, ease: "power2.out" }, 3.0);
+    // Text starts writing as the sheet arrives, so the draft is never an empty box.
+    lines.forEach((l, i) => tl.to(l, { clipPath: "inset(0 0% 0 0)", duration: 0.1 }, 3.06 + i * 0.07));
     // 5 — approved, sent, HubSpot updated.
     tl.to(q("[data-approve-btn]"), { scale: 0.94, duration: 0.06 }, 4.12);
     tl.to(q("[data-approve-btn]"), { scale: 1, duration: 0.06 }, 4.18);
     tl.to(q("[data-approve-row]"), { autoAlpha: 0, duration: 0.1 }, 4.22);
     tl.to(q("[data-sent-row]"), { autoAlpha: 1, duration: 0.1 }, 4.28);
+    collapse("context", 3.96);
     expand("hubspot", 4.3);
+    // Run checklist: Enrich (ch2), Screen + Score (ch3), Draft (ch4), Approve (ch5).
+    [1.05, 2.05, 2.5, 3.1, 4.25].forEach((at, i) => {
+      tl.to(stepEls[i], { color: "var(--ink)", duration: 0.08 }, at);
+      tl.to(stepDots[i], { backgroundColor: "var(--mint)", scale: 1.25, duration: 0.06 }, at);
+      tl.to(stepDots[i], { scale: 1, duration: 0.06 }, at + 0.06);
+    });
     tl.to({}, { duration: 0.35 }, 5);
   });
 
@@ -131,9 +164,21 @@ export function StoryStage() {
         </div>
 
         <div aria-hidden="true">
-          <AppWindow title={`Inbox — ${owner.email}`} bodyClassName="grid h-[min(600px,calc(100svh-180px))] min-h-[480px] grid-cols-[1fr_264px]">
+          <AppWindow title={`Inbox — ${owner.email}`} bodyClassName="grid h-[min(580px,calc(100svh-170px))] min-h-[500px] grid-cols-[1fr_264px]">
             <div className="relative overflow-hidden p-6">
               <EmailMessage />
+              <div data-history className="mt-6 border-t border-line pt-5">
+                <p className="text-xs font-medium text-ink-3">Earlier with Carthage Labs</p>
+                <ul className="mt-3 space-y-2.5">
+                  {history.map((h) => (
+                    <li key={h.text} className="flex items-center gap-3 text-sm text-ink-2">
+                      <BrandLogo id={h.logo} size="xs" decorative />
+                      <span className="flex-1">{h.text}</span>
+                      <span className="text-xs text-ink-3">{h.when}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
               <div data-draft className="absolute inset-x-4 bottom-4 opacity-0">
                 <DraftCard animated />
               </div>
@@ -143,15 +188,49 @@ export function StoryStage() {
               <RailCard name="lead" summary="Lead · Mira Haddad, Carthage Labs" open>
                 <LeadCard />
               </RailCard>
+              <RailCard name="queued" summary="" open>
+                <div className="rounded-[var(--radius-md)] border border-dashed border-line-strong p-3">
+                  <p className="text-xs font-medium text-ink-3">Up next</p>
+                  <div className="mt-2 flex items-center gap-2.5 text-sm text-ink-2">
+                    <BrandLogo id="apify" size="xs" decorative />
+                    <span className="flex-1">LinkedIn company scraper</span>
+                    <span className="text-xs text-ink-3">queued</span>
+                  </div>
+                </div>
+              </RailCard>
               <RailCard name="apify" summary="Enriched · 140 staff, Series B">
                 <EnrichCard />
               </RailCard>
               <RailCard name="screen" summary="Passed · ICP score 86 / 100">
                 <ScreenCard scoreRef />
               </RailCard>
+              <RailCard name="context" summary="Drafted with pricing, calendar, guide">
+                <div className="rounded-[var(--radius-md)] border border-line bg-window p-3">
+                  <p className="text-xs font-medium text-ink-3">Drafting with</p>
+                  <ul className="mt-2.5 space-y-2">
+                    {draftContext.map((c) => (
+                      <li key={c.text} className="flex items-center gap-2.5 text-sm text-ink-2">
+                        <BrandLogo id={c.logo} size="xs" decorative />
+                        <span>{c.text}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </RailCard>
               <RailCard name="hubspot" summary="HubSpot · Proposal sent">
                 <HubSpotCard />
               </RailCard>
+              <div className="mt-auto rounded-[var(--radius-md)] border border-line bg-window p-3">
+                <p className="text-xs font-medium text-ink-3">This run</p>
+                <ol className="mt-2.5 space-y-2">
+                  {steps.map((st) => (
+                    <li key={st} data-step className="flex items-center gap-2.5 text-sm">
+                      <span data-step-dot className="h-2 w-2 rounded-full bg-line-strong" />
+                      {st}
+                    </li>
+                  ))}
+                </ol>
+              </div>
             </div>
           </AppWindow>
         </div>
