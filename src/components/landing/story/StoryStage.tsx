@@ -111,7 +111,7 @@ export function StoryStage() {
 
   return (
     <div ref={root} className="motion-stage">
-      <div className="container-x grid h-[100svh] grid-cols-[minmax(0,6fr)_minmax(0,7fr)] items-center gap-14 pt-[var(--header-h)]">
+      <div className="container-x grid h-[100svh] grid-cols-[minmax(0,5fr)_minmax(0,7fr)] items-center gap-12 pt-[var(--header-h)]">
         <div className="flex gap-7">
           <ol className="flex flex-col gap-1.5 pt-2" aria-hidden="true">
             {chapters.map((c) => (
@@ -123,7 +123,7 @@ export function StoryStage() {
           <div className="relative min-h-[220px] flex-1">
             {chapters.map((c, i) => (
               <div key={c.id} data-ch-text className="absolute inset-x-0 top-0" style={i ? { opacity: 0 } : undefined}>
-                <h3 className="text-[2.25rem] leading-[1.1] font-semibold text-ink">{c.title}</h3>
+                <h3 className="text-[2.125rem] leading-[1.1] font-semibold text-ink">{c.title}</h3>
                 <p className="text-lead mt-4 max-w-sm text-ink-2">{c.text}</p>
               </div>
             ))}
@@ -131,7 +131,7 @@ export function StoryStage() {
         </div>
 
         <div aria-hidden="true">
-          <AppWindow title={`Inbox — ${owner.email}`} bodyClassName="grid h-[min(540px,calc(100svh-220px))] min-h-[460px] grid-cols-[1fr_252px]">
+          <AppWindow title={`Inbox — ${owner.email}`} bodyClassName="grid h-[min(600px,calc(100svh-180px))] min-h-[480px] grid-cols-[1fr_264px]">
             <div className="relative overflow-hidden p-6">
               <EmailMessage />
               <div data-draft className="absolute inset-x-4 bottom-4 opacity-0">

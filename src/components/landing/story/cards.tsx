@@ -17,7 +17,7 @@ export function EmailMessage({ compact = false }: { compact?: boolean }) {
   return (
     <div>
       <div className="flex items-center gap-3">
-        <Avatar initials={mira.initials} size="md" tone="amber" />
+        <Avatar name={mira.name} size="md" />
         <div className="min-w-0 flex-1">
           <p className="truncate text-sm font-medium text-ink">{mira.name}</p>
           <p className="truncate text-xs text-ink-3">
@@ -44,7 +44,7 @@ export function LeadCard() {
     <div className={cn(cardBox, "p-3.5")}>
       <CardLabel>New lead</CardLabel>
       <div className="mt-2.5 flex items-center gap-2.5">
-        <Avatar initials={mira.initials} tone="amber" />
+        <Avatar name={mira.name} />
         <div className="min-w-0">
           <p className="truncate text-sm font-medium text-ink">{mira.name}</p>
           <p className="truncate text-xs text-ink-3">
@@ -134,9 +134,7 @@ export function DraftCard({ sent = false, animated = false }: { sent?: boolean; 
           </span>
         </div>
         <div data-sent-row={animated || undefined} className={cn("absolute inset-0 flex items-center gap-2 text-xs text-ink-2", !sent && !animated && "hidden", animated && "opacity-0")}>
-          <span className="grid h-6 w-6 place-items-center rounded-full bg-mint-soft text-mint">
-            <Check className="h-3.5 w-3.5" aria-hidden="true" />
-          </span>
+          <Avatar name={owner.name} size="xs" />
           Approved by {owner.name} · sent {deal.synced}
         </div>
       </div>

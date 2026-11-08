@@ -42,7 +42,7 @@ function SyncDiagram() {
 /** All fifteen official marks, grouped by job — a calm list, not a wall of tiles. */
 export function Integrations() {
   return (
-    <section id="integrations" aria-labelledby="integrations-title" className="scroll-mt-[var(--header-h)] border-t border-line py-16 md:py-28">
+    <section id="integrations" aria-labelledby="integrations-title" className="scroll-mt-[var(--header-h)] py-16 md:py-28">
       <div className="container-x grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14">
         <div>
           <SectionHead id="integrations-title" title="Works where you work.">

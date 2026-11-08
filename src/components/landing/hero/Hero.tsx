@@ -7,6 +7,8 @@ import { TrialButton } from "@/components/ui/TrialButton";
 import { gsap, useScene } from "../shared/useScene";
 import { HeroWindow } from "./HeroWindow";
 import { LogoStrip } from "./LogoStrip";
+import { Em } from "../shared/SectionHead";
+import { TrustedBy } from "../trust/TrustedBy";
 
 /** Headline, one sentence, two buttons, one product window. Nothing else. */
 export function Hero() {
@@ -32,7 +34,7 @@ export function Hero() {
     <section ref={root} aria-labelledby="hero-title" className="overflow-hidden pt-16 md:pt-24">
       <div className="container-x text-center">
         <h1 id="hero-title" className="text-display mx-auto font-semibold tracking-[-0.03em] text-ink">
-          Your next deal starts in your inbox.
+          Your next deal starts in your <Em>inbox</Em>.
         </h1>
         <p className="text-lead mx-auto mt-5 max-w-[34rem] text-ink-2">
           SooqSense takes it from there — follow-ups, meeting notes and CRM updates, ready for you to approve.
@@ -55,6 +57,7 @@ export function Hero() {
         </div>
       </div>
       <LogoStrip />
+      <TrustedBy />
     </section>
   );
 }

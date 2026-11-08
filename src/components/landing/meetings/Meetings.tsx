@@ -67,7 +67,7 @@ export function Meetings() {
                   <li key={l.t} className="relative flex gap-3 rounded-[var(--radius-sm)] px-2 py-2 sm:gap-4">
                     {l.key !== undefined && <span data-mark className="absolute inset-0 rounded-[var(--radius-sm)] bg-marker" aria-hidden="true" />}
                     <span className="relative w-10 shrink-0 pt-0.5 text-xs text-ink-3 tabular">{l.t}</span>
-                    <Avatar initials={l.who} size="xs" tone={l.who === "AF" ? "amber" : "blue"} className="relative mt-0.5" />
+                    <Avatar initials={l.who} name={l.who === "MH" ? "Mira Haddad" : "Ahmed Fayyaz"} size="xs" tone="amber" className="relative mt-0.5" />
                     <p className={cn("relative text-sm leading-relaxed", l.key !== undefined ? "text-ink" : "text-ink-2")}>{l.text}</p>
                   </li>
                 ))}

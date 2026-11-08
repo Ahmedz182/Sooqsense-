@@ -8,7 +8,7 @@ const phone = new Set<IntegrationId>(["gmail", "outlook", "zoom", "hubspot", "sa
 export function LogoStrip() {
   const withLogo = integrations.filter((i) => i.logo);
   return (
-    <div className="container-x mt-14 pb-20 md:mt-20 md:pb-28">
+    <div className="container-x mt-14 pb-14 md:mt-20 md:pb-16">
       <p className="text-center text-sm text-ink-3">Works with the tools you already use.</p>
       <ul className="mt-5 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
         {withLogo.map((i) => (

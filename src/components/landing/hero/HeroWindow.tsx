@@ -21,7 +21,7 @@ function Sidebar() {
   return (
     <aside className="hidden flex-col border-r border-line bg-window-pane p-3 lg:flex">
       <div className="flex items-center gap-2.5 px-2 py-2">
-        <Avatar initials={owner.initials} tone="amber" />
+        <Avatar name={owner.name} />
         <div className="min-w-0">
           <p className="truncate text-sm font-medium text-ink">{owner.name}</p>
           <p className="truncate text-[0.7rem] text-ink-3">{owner.email}</p>
@@ -60,7 +60,7 @@ function Row({ who, initials, subject, preview, time, fresh = false }: { who: st
   return (
     <li className={cn("relative flex gap-3 overflow-hidden border-b border-line px-4 py-3.5", fresh && "arrive bg-marker")}>
       {fresh && <span className="absolute top-[22px] left-1.5 h-1.5 w-1.5 rounded-full bg-amber" aria-hidden="true" />}
-      <Avatar initials={initials} tone={fresh ? "amber" : "neutral"} />
+      <Avatar initials={initials} name={who} size="md" tone={fresh ? "amber" : "neutral"} />
       <div className="min-w-0 flex-1">
         <div className="flex items-baseline justify-between gap-2">
           <p className={cn("truncate text-sm text-ink", fresh ? "font-semibold" : "font-medium")}>{who}</p>
@@ -97,7 +97,7 @@ function ReadingPane() {
     <article className="hidden min-w-0 flex-col p-7 md:flex">
       <h3 className="text-xl font-semibold tracking-tight text-ink">{miraEmail.subject}</h3>
       <div className="mt-5 flex items-center gap-3">
-        <Avatar initials={mira.initials} size="md" tone="amber" />
+        <Avatar name={mira.name} size="md" />
         <div className="min-w-0 flex-1">
           <p className="text-sm font-medium text-ink">
             {mira.name} <span className="font-normal text-ink-3">· {mira.title}, {mira.company}</span>

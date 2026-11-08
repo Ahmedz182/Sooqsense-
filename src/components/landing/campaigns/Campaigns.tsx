@@ -5,10 +5,14 @@ import { ArrowDown, ArrowRight } from "lucide-react";
 import { people } from "@/config/demo";
 import { BrandLogo } from "../shared/BrandLogo";
 import { Avatar } from "../shared/Avatar";
-import { SectionHead } from "../shared/SectionHead";
+import { Em, SectionHead } from "../shared/SectionHead";
 import { gsap, useScene } from "../shared/useScene";
 
-const leads = people.filter((p) => p.name !== "Mira Haddad").slice(0, 5);
+const leads = [
+  ...people.filter((p) => ["James Whitfield", "Lena Brandt", "Daniel Ortiz"].includes(p.name)),
+  { name: "Arjun Mehta", initials: "AM", email: "arjun@brightwave.ca", company: "Brightwave", city: "Toronto, CA" },
+  { name: "Isabel Moreno", initials: "IM", email: "isabel@solventhq.es", company: "Solvent", city: "Madrid, ES" },
+];
 
 const sequence = [
   { day: "Day 0", subject: "Fridays back from CRM updates" },
@@ -30,7 +34,7 @@ function LeadList() {
       <ul className="mt-4 divide-y divide-line border-y border-line">
         {leads.map((p) => (
           <li key={p.email} data-lead className="flex items-center gap-3 py-2.5">
-            <Avatar initials={p.initials} size="xs" />
+            <Avatar initials={p.initials} name={p.name} size="sm" />
             <p className="min-w-0 flex-1 truncate text-sm text-ink">
               {p.name} <span className="text-ink-3">· {p.company}</span>
             </p>
@@ -116,11 +120,36 @@ export function Campaigns() {
   });
 
   return (
-    <section ref={root} id="campaigns" aria-labelledby="campaigns-title" className="scroll-mt-[var(--header-h)] bg-bg-sunken py-16 md:py-28">
+    <section ref={root} id="campaigns" data-theme="dark" aria-labelledby="campaigns-title" className="scroll-mt-[var(--header-h)] bg-bg-sunken py-16 text-ink md:py-28">
       <div className="container-x">
-        <SectionHead id="campaigns-title" title="Then a thousand more.">
-          The same care, one-to-many. Apify finds the people, Instantly runs the sequence, and Mailchimp keeps everyone else warm.
-        </SectionHead>
+        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-14">
+          <SectionHead id="campaigns-title" title={<>Then a <Em>thousand</Em> more.</>}>
+            The same care, one-to-many. Apify finds the people, Instantly runs the sequence, and Mailchimp keeps everyone else warm.
+          </SectionHead>
+          <div className="rounded-[var(--radius-xl)] border border-line bg-bg-elev p-5">
+            <div className="flex items-center gap-3">
+              <Avatar name="Ahmed Fayyaz" size="md" />
+              <div>
+                <p className="text-sm font-medium text-ink">While you slept</p>
+                <p className="text-xs text-ink-3">Q1 RevOps outreach · day 4</p>
+              </div>
+            </div>
+            <dl className="mt-5 grid grid-cols-3 gap-3 text-center">
+              {[
+                ["214", "leads found"],
+                ["12", "replies"],
+                ["3", "meetings booked"],
+              ].map(([n, l]) => (
+                <div key={l} className="rounded-[var(--radius-md)] bg-bg-sunken px-2 py-3">
+                  <dt className="sr-only">{l}</dt>
+                  <dd className="tabular text-2xl font-semibold tracking-tight text-ink">{n}</dd>
+                  <dd className="text-xs text-ink-3">{l}</dd>
+                </div>
+              ))}
+            </dl>
+            <p className="mt-4 text-xs text-ink-3">Before: 6 hours of list building. Now: one approval.</p>
+          </div>
+        </div>
 
         <div data-campaign-visual className="mt-12 grid grid-cols-1 items-start gap-4 md:mt-16 lg:grid-cols-[minmax(0,4fr)_auto_minmax(0,8fr)] lg:gap-5">
           <LeadList />

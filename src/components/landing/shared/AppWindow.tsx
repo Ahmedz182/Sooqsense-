@@ -31,7 +31,7 @@ export function AppWindow({
           <span className="h-2.5 w-2.5 rounded-full bg-line-strong" />
         </span>
         <span className="min-w-0 flex-1 truncate text-center text-xs font-medium text-ink-3">{title}</span>
-        {showOwner ? <Avatar initials={owner.initials} size="xs" tone="amber" /> : <span className="w-6" />}
+        {showOwner ? <Avatar name={owner.name} size="xs" /> : <span className="w-6" />}
       </div>
       <div className={bodyClassName}>{children}</div>
     </div>

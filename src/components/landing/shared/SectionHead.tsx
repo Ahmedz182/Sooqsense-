@@ -1,6 +1,11 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
+/** The one emphasised word in a large heading. */
+export function Em({ children }: { children: ReactNode }) {
+  return <span className="text-accent-display">{children}</span>;
+}
+
 /** Section title (2–6 words, one line on desktop) + one plain sentence. */
 export function SectionHead({
   id,
@@ -10,7 +15,7 @@ export function SectionHead({
   className,
 }: {
   id: string;
-  title: string;
+  title: ReactNode;
   children?: ReactNode;
   align?: "left" | "center";
   className?: string;
