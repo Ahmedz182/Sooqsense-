@@ -30,8 +30,8 @@
   --color-violet: var(--violet);
   --color-violet-soft: var(--violet-soft);
 
-  --font-display: var(--font-clash), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-brand), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-brand), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --radius-sm: var(--radius-sm);
@@ -61,8 +61,9 @@
   }
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
-    line-height: 1.04;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.08;
     text-wrap: balance;
   }
   p { text-wrap: pretty; }

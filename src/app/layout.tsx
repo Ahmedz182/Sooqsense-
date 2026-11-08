@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import "./globals.css";
-import { clash, jetbrains, satoshi } from "./fonts";
+import { brand, jetbrains } from "./fonts";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { buildMetadata } from "@/lib/seo";
@@ -20,7 +20,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${clash.variable} ${satoshi.variable} ${jetbrains.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${brand.variable} ${jetbrains.variable}`}>
       <body>
         <ThemeProvider>
           <SmoothScroll />

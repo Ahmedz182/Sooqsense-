@@ -1,30 +1,57 @@
 import localFont from "next/font/local";
 import { JetBrains_Mono } from "next/font/google";
 
-/** Headings — Clash Display (Fontshare, ITF Free Font License), self-hosted. */
-export const clash = localFont({
-  src: [
-    { path: "../fonts/ClashDisplay-400.woff2", weight: "400", style: "normal" },
-    { path: "../fonts/ClashDisplay-500.woff2", weight: "500", style: "normal" },
-    { path: "../fonts/ClashDisplay-600.woff2", weight: "600", style: "normal" },
-    { path: "../fonts/ClashDisplay-700.woff2", weight: "700", style: "normal" },
-  ],
-  variable: "--font-clash",
+/**
+ * Brand typeface candidates (round 2). All four map to the same CSS variable,
+ * `--font-brand`; only the one picked by NEXT_PUBLIC_FONT is applied in the
+ * root layout. Once a font is chosen, delete the others and their files.
+ */
+
+/** Geist 1.8.2 (Vercel, SIL OFL). */
+const geist = localFont({
+  src: [{ path: "../fonts/Geist-Variable.woff2", weight: "100 900", style: "normal" }],
+  variable: "--font-brand",
   display: "swap",
 });
 
-/** Body — Satoshi (Fontshare, ITF Free Font License), self-hosted. */
-export const satoshi = localFont({
+/** General Sans (Fontshare, ITF Free Font License). */
+const generalSans = localFont({
   src: [
-    { path: "../fonts/Satoshi-300.woff2", weight: "300", style: "normal" },
-    { path: "../fonts/Satoshi-400.woff2", weight: "400", style: "normal" },
-    { path: "../fonts/Satoshi-500.woff2", weight: "500", style: "normal" },
-    { path: "../fonts/Satoshi-700.woff2", weight: "700", style: "normal" },
-    { path: "../fonts/Satoshi-900.woff2", weight: "900", style: "normal" },
+    { path: "../fonts/GeneralSans-400.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/GeneralSans-500.woff2", weight: "500", style: "normal" },
+    { path: "../fonts/GeneralSans-600.woff2", weight: "600", style: "normal" },
   ],
-  variable: "--font-satoshi",
+  variable: "--font-brand",
   display: "swap",
 });
+
+/** Instrument Sans (SIL OFL, via Fontsource 5.3.0 files). */
+const instrumentSans = localFont({
+  src: [
+    { path: "../fonts/InstrumentSans-400.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/InstrumentSans-500.woff2", weight: "500", style: "normal" },
+    { path: "../fonts/InstrumentSans-600.woff2", weight: "600", style: "normal" },
+  ],
+  variable: "--font-brand",
+  display: "swap",
+});
+
+/** Satoshi (Fontshare, ITF Free Font License). */
+const satoshi = localFont({
+  src: [
+    { path: "../fonts/Satoshi-400.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/Satoshi-500.woff2", weight: "500", style: "normal" },
+    { path: "../fonts/Satoshi-700.woff2", weight: "600", style: "normal" },
+  ],
+  variable: "--font-brand",
+  display: "swap",
+});
+
+const brandFonts = { geist, general: generalSans, instrument: instrumentSans, satoshi } as const;
+export type BrandFont = keyof typeof brandFonts;
+
+const choice = (process.env.NEXT_PUBLIC_FONT || "geist") as BrandFont;
+export const brand = brandFonts[choice] ?? geist;
 
 /** Data / UI labels. */
 export const jetbrains = JetBrains_Mono({
