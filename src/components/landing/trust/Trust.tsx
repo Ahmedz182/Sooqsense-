@@ -1,40 +1,68 @@
 /* eslint-disable @next/next/no-img-element */
 import { Check } from "lucide-react";
-import { customers, founder, securityFacts } from "@/config/trust";
+import { founder, reviewSummary, securityFacts, showSampleProof, testimonials, visible } from "@/config/trust";
 import { Avatar } from "../shared/Avatar";
-import { SectionHead } from "../shared/SectionHead";
+import { Em, SectionHead } from "../shared/SectionHead";
+import { SampleTag, Stars } from "./Proof";
 
-/** Shown only on items the owner hasn't confirmed yet, so nothing unverified passes as fact. */
-export function PlaceholderTag() {
+function Reviews() {
+  const quotes = visible(testimonials);
+  const summary = !reviewSummary.sample || showSampleProof ? reviewSummary : null;
+  if (!quotes.length && !summary) return null;
   return (
-    <span className="ml-2 inline-flex h-5 items-center rounded-full border border-dashed border-line-strong px-2 align-middle text-[0.6875rem] font-normal text-ink-3">
-      placeholder
-    </span>
+    <div className="mt-14 md:mt-16">
+      {summary && (
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+          <span className="tabular text-3xl font-semibold tracking-tight text-ink">{summary.rating.toFixed(1)}</span>
+          <Stars rating={summary.rating} />
+          <span className="text-sm text-ink-2">
+            {summary.label} · {summary.count} reviews
+          </span>
+          {summary.sample && <SampleTag />}
+        </div>
+      )}
+      <ul className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
+        {quotes.map((t) => (
+          <li key={t.name}>
+            <figure className="flex h-full flex-col rounded-[var(--radius-lg)] border border-line bg-bg-elev p-6">
+              <div className="flex items-center justify-between gap-3">
+                <Stars rating={t.rating} />
+                {t.sample && <SampleTag />}
+              </div>
+              <blockquote className="mt-4 flex-1 leading-relaxed text-ink">&ldquo;{t.quote}&rdquo;</blockquote>
+              <figcaption className="mt-6 flex items-center gap-3">
+                {/* Initials only: stock photos never sit next to a quote. */}
+                <Avatar initials={t.name.split(" ").map((w) => w[0]).join("")} size="md" tone="neutral" />
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-medium text-ink">{t.name}</p>
+                  <p className="truncate text-xs text-ink-3">
+                    {t.title}, {t.company}
+                  </p>
+                </div>
+              </figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
-const initials = (name: string) =>
-  name
-    .split(" ")
-    .map((p) => p[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
-
 function FounderNote() {
+  if (founder.sample && !showSampleProof) return null;
   return (
-    <figure className="flex flex-col self-start rounded-[var(--radius-xl)] bg-bg-sunken p-7 sm:p-9">
-      <blockquote className="text-lg leading-relaxed text-ink sm:text-xl">&ldquo;{founder.note}&rdquo;</blockquote>
+    <figure className="flex flex-col self-start rounded-[var(--radius-xl)] border border-line bg-bg-elev p-7 text-ink sm:p-9">
+      <blockquote className="text-lg leading-relaxed sm:text-xl">&ldquo;{founder.note}&rdquo;</blockquote>
       <figcaption className="mt-8 flex items-center gap-3.5">
         {founder.photo ? (
-          <img src={founder.photo} alt={founder.name} width={56} height={56} className="h-14 w-14 rounded-full object-cover" />
+          <img src={founder.photo} alt={founder.name} width={56} height={56} className="h-14 w-14 rounded-full object-cover ring-1 ring-line" />
         ) : (
-          <Avatar initials={initials(founder.name)} size="lg" tone="amber" />
+          <Avatar initials="AF" size="lg" tone="amber" />
         )}
         <div>
-          <p className="font-medium text-ink">
+          <p className="flex items-center gap-2 font-medium text-ink">
             {founder.name}
-            {!founder.confirmed && <PlaceholderTag />}
+            {founder.sample && <SampleTag label="Draft" />}
           </p>
           <p className="text-sm text-ink-3">{founder.role}</p>
         </div>
@@ -43,31 +71,12 @@ function FounderNote() {
   );
 }
 
-function CustomerQuotes() {
-  if (!customers.length) return null;
-  return (
-    <ul className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2">
-      {customers.map((c) => (
-        <li key={c.name}>
-          <figure className="border-t border-line pt-6">
-            {c.logo && <img src={c.logo} alt={c.company} className="mb-5 h-6 w-auto" />}
-            <blockquote className="text-lg leading-relaxed text-ink">&ldquo;{c.quote}&rdquo;</blockquote>
-            <figcaption className="mt-4 text-sm text-ink-3">
-              {c.name}, {c.title} · {c.company}
-            </figcaption>
-          </figure>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-/** Security facts, a founder's note, and real customer quotes once there are some. */
+/** Security facts, a founder's note, reviews and testimonials. */
 export function Trust() {
   return (
-    <section id="trust" aria-labelledby="trust-title" className="scroll-mt-[var(--header-h)] py-16 md:py-28">
+    <section id="trust" data-theme="dark" aria-labelledby="trust-title" className="scroll-mt-[var(--header-h)] bg-bg-sunken py-16 text-ink md:py-28">
       <div className="container-x">
-        <SectionHead id="trust-title" title="Built to be trusted.">
+        <SectionHead id="trust-title" title={<>Built to be <Em>trusted</Em>.</>}>
           SooqSense works inside your inbox and your CRM. Here is exactly what it can and can&rsquo;t do.
         </SectionHead>
         <div className="mt-12 grid grid-cols-1 gap-10 md:mt-14 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
@@ -78,9 +87,9 @@ export function Trust() {
                   <Check className="h-3.5 w-3.5" aria-hidden="true" />
                 </span>
                 <div>
-                  <h3 className="text-base font-medium tracking-normal text-ink">
+                  <h3 className="flex flex-wrap items-center gap-2 text-base font-medium tracking-normal text-ink">
                     {f.title}
-                    {!f.confirmed && <PlaceholderTag />}
+                    {!f.confirmed && <SampleTag label="To confirm" />}
                   </h3>
                   <p className="mt-1 text-sm leading-relaxed text-ink-2">{f.detail}</p>
                 </div>
@@ -89,7 +98,7 @@ export function Trust() {
           </ul>
           <FounderNote />
         </div>
-        <CustomerQuotes />
+        <Reviews />
       </div>
     </section>
   );

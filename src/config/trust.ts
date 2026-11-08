@@ -1,50 +1,32 @@
 /**
- * TRUST — owner-supplied facts.
+ * TRUST — owner-supplied proof.
  *
- * Nothing here is invented proof. Every item stays `confirmed: false` (and shows a
- * small "placeholder" tag on the site) until the owner confirms it is true today.
- * Customer quotes render only when the `customers` array has entries.
- * Do not add certifications that have not been audited (no SOC 2).
+ * Rules (spec §9):
+ * - Entries marked `sample: true` are design placeholders. They render ONLY when
+ *   NEXT_PUBLIC_SHOW_SAMPLE_PROOF=true (preview builds), always with a "Sample" tag.
+ *   Production builds hide them. Replace them with real, permissioned entries and set
+ *   `sample: false`.
+ * - Sample testimonials use initials avatars and fictional company wordmarks — never
+ *   stock photos and never real company logos.
+ * - Security facts stay `confirmed: false` (tagged "To confirm" in previews) until the
+ *   owner confirms each one is true today. No certifications that aren't audited (no SOC 2).
  */
 
-export type SecurityFact = {
-  id: string;
-  title: string;
-  detail: string;
-  confirmed: boolean;
-};
+export const showSampleProof = process.env.NEXT_PUBLIC_SHOW_SAMPLE_PROOF === "true";
+
+/** Keep real entries; keep samples only in preview builds. */
+export function visible<T extends { sample: boolean }>(items: T[]): T[] {
+  return items.filter((i) => !i.sample || showSampleProof);
+}
+
+export type SecurityFact = { id: string; title: string; detail: string; confirmed: boolean };
 
 export const securityFacts: SecurityFact[] = [
-  {
-    id: "read-only",
-    title: "Read-only by default",
-    detail: "SooqSense reads your inbox and calendar. It asks before it writes anything.",
-    confirmed: false,
-  },
-  {
-    id: "approval",
-    title: "Nothing sends without approval",
-    detail: "Every email, CRM update and campaign waits for a person to approve it.",
-    confirmed: false,
-  },
-  {
-    id: "encryption",
-    title: "Encrypted in transit and at rest",
-    detail: "TLS on every connection. Stored data is encrypted on disk.",
-    confirmed: false,
-  },
-  {
-    id: "gdpr",
-    title: "GDPR-ready",
-    detail: "A data processing agreement, full export and deletion on request.",
-    confirmed: false,
-  },
-  {
-    id: "no-training",
-    title: "Never trains shared models",
-    detail: "Your emails, calls and contacts are never used to train models for anyone else.",
-    confirmed: false,
-  },
+  { id: "read-only", title: "Read-only by default", detail: "SooqSense reads your inbox and calendar. It asks before it writes anything.", confirmed: false },
+  { id: "approval", title: "Nothing sends without approval", detail: "Every email, CRM update and campaign waits for a person to approve it.", confirmed: false },
+  { id: "encryption", title: "Encrypted in transit and at rest", detail: "TLS on every connection. Stored data is encrypted on disk.", confirmed: false },
+  { id: "gdpr", title: "GDPR-ready", detail: "A data processing agreement, full export and deletion on request.", confirmed: false },
+  { id: "no-training", title: "Never trains shared models", detail: "Your emails, calls and contacts are never used to train models for anyone else.", confirmed: false },
 ];
 
 export type Founder = {
@@ -53,7 +35,8 @@ export type Founder = {
   note: string;
   /** Path under /public, e.g. "/team/ahmed.jpg". null shows an initials avatar. */
   photo: string | null;
-  confirmed: boolean;
+  /** Draft wording until the owner approves it; shown like a sample until then. */
+  sample: boolean;
 };
 
 export const founder: Founder = {
@@ -61,18 +44,64 @@ export const founder: Founder = {
   role: "Founder, SooqSense",
   note:
     "I built SooqSense after losing good deals to slow follow-ups and stale CRM records. It does the busywork. You stay in charge of every word that leaves your outbox.",
-  photo: null,
-  confirmed: false,
+  photo: "/images/people/ahmed-fayyaz-lg.webp",
+  sample: true,
 };
 
-export type CustomerQuote = {
+/** "Trusted by" row. Fictional wordmarks until real customers agree to be named. */
+export type TrustedCompany = { name: string; style: "serif" | "wide" | "mono" | "bold" | "light"; sample: boolean };
+
+export const trustedBy: TrustedCompany[] = [
+  { name: "Northwind", style: "bold", sample: true },
+  { name: "HelioScale", style: "wide", sample: true },
+  { name: "Ledgerly", style: "serif", sample: true },
+  { name: "BRIGHTPATH", style: "light", sample: true },
+  { name: "Maison Verte", style: "serif", sample: true },
+  { name: "arcfield", style: "bold", sample: true },
+];
+
+export type Testimonial = {
+  quote: string;
   name: string;
   title: string;
   company: string;
-  quote: string;
-  /** Path under /public to the customer's logo, or null. */
+  /** 1–5 */
+  rating: number;
+  /** Path under /public to the customer's own logo, or null. Never a stock photo. */
   logo: string | null;
+  sample: boolean;
 };
 
-/** Real customer quotes only, shared with permission. Leave empty until then. */
-export const customers: CustomerQuote[] = [];
+export const testimonials: Testimonial[] = [
+  {
+    quote: "Our reps stopped spending Friday afternoons in the CRM. The follow-ups go out the same day, and I still approve every one.",
+    name: "Hannah Brooks",
+    title: "Head of Sales",
+    company: "Northwind",
+    rating: 5,
+    logo: null,
+    sample: true,
+  },
+  {
+    quote: "The meeting notes land on the right deal before I've closed Zoom. That alone paid for the seats.",
+    name: "Tomás Ruiz",
+    title: "Account Executive",
+    company: "HelioScale",
+    rating: 5,
+    logo: null,
+    sample: true,
+  },
+  {
+    quote: "We built our outbound in an afternoon: Apify list, scoring, Instantly sequence. It just runs.",
+    name: "Kate Lindqvist",
+    title: "RevOps Lead",
+    company: "Ledgerly",
+    rating: 5,
+    logo: null,
+    sample: true,
+  },
+];
+
+export type ReviewSummary = { rating: number; count: number; label: string; sample: boolean };
+
+export const reviewSummary: ReviewSummary = { rating: 4.9, count: 120, label: "average from early-access teams", sample: true };
