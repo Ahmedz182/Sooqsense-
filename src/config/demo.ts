@@ -44,22 +44,25 @@ export const integrations = [
   { id: "slack", name: "Slack", category: "Team", logo: "/logos/slack.svg" },
   { id: "linkedin", name: "LinkedIn", category: "Prospecting", logo: "/logos/linkedin.svg" },
   { id: "mailchimp", name: "Mailchimp", category: "Campaigns", logo: "/logos/mailchimp.svg" },
+  { id: "instantly", name: "Instantly", category: "Cold email", logo: "/logos/instantly.svg" },
+  { id: "apify", name: "Apify", category: "Lead data & scraping", logo: "/logos/apify.svg" },
   { id: "sheets", name: "Google Sheets", category: "Data", logo: "/logos/google-sheets.svg" },
   { id: "notion", name: "Notion", category: "Docs", logo: "/logos/notion.svg" },
   { id: "webhooks", name: "Webhooks & API", category: "Developer", logo: null },
 ] as const;
 
 /** Workflow node catalogue — shared vocabulary for builders and playgrounds. */
-export type NodeKind = "trigger" | "enrich" | "security" | "ai" | "branch" | "action" | "meeting" | "campaign" | "notify";
+export type NodeKind = "trigger" | "source" | "enrich" | "security" | "ai" | "branch" | "action" | "meeting" | "campaign" | "notify";
 
 export const nodeCatalog: { kind: NodeKind; label: string; options: string[] }[] = [
   { kind: "trigger", label: "Trigger", options: ["Website contact form", "LinkedIn reply", "New email from lead", "Meeting ended", "Deal stage changed", "Renewal in 30 days"] },
+  { kind: "source", label: "Lead source (Apify actor)", options: ["Apify · Google Maps leads", "Apify · LinkedIn company scraper", "Apify · LinkedIn profile scraper", "Apify · Website contact crawler", "Apify · G2 reviews scraper"] },
   { kind: "enrich", label: "Enrich", options: ["Company & firmographics", "LinkedIn profile", "Tech stack", "Funding & headcount"] },
   { kind: "security", label: "Security check", options: ["Spam & bot screen", "Domain reputation", "PII redaction"] },
   { kind: "ai", label: "AI step", options: ["Score against ICP", "Summarise thread", "Draft reply in your voice", "Write pitch report", "Generate SEO brief"] },
   { kind: "branch", label: "Branch", options: ["If score ≥ 80", "If no reply in 3 days", "If company > 200 staff"] },
   { kind: "meeting", label: "Meeting", options: ["Book a call", "Record & transcribe", "Extract action items"] },
-  { kind: "campaign", label: "Campaign", options: ["Add to nurture sequence", "Send newsletter", "Launch LinkedIn touch"] },
+  { kind: "campaign", label: "Campaign", options: ["Add to nurture sequence", "Instantly · cold email campaign", "Instantly · inbox warm-up", "Mailchimp · newsletter", "Launch LinkedIn touch"] },
   { kind: "action", label: "Action", options: ["Send email (after approval)", "Update HubSpot", "Update Salesforce", "Create task", "Send report to client"] },
   { kind: "notify", label: "Notify", options: ["Slack #sales", "Email digest", "Morning queue"] },
 ];

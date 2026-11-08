@@ -136,3 +136,15 @@ blobs, small floating tool tiles, live details (office local times), a searchabl
 - Human microcopy with a point of view, short sentences, a little wit ("Your CRM, minus the data entry.").
 - Custom SVG icons/marks for integrations drawn simply (wordmark-in-a-tile), not a random icon pack mash-up.
 - One signature motif per version that recurs subtly (e.g. the amber "next" dot, a connector line, a ribbon).
+
+## 8. Round 2 direction (owner feedback, 2026-11-08)
+
+- Round 1 rejected: headings too big and too long (wrapping over many lines with no clear meaning), muddy amber text,
+  weak contrast, no felt storytelling, no trust. Clash Display is dropped; pick a professional font (see docs/review/font-options.png).
+- **Headings: 2–6 words, one line on desktop, max two on mobile, plain meaning.** Display ≤ 64px, section titles ≤ 40px, weight 500–600.
+- Amber never for headline text — only buttons, small labels, markers. All headings use --ink.
+- **Hero: the most attractive section but with nothing extra** — headline, one sentence, two buttons, one hero visual. No badges,
+  clocks, eyebrows, highlighters, chips or counters in the hero.
+- Storytelling like Apple product pages: one sticky product stage, chapters change inside it as you scroll; chapter progress indicator.
+- Trust: real customer logos/quotes, founder note + photo, true security facts (owner supplies; placeholders until then).
+- Real integration logos from public/logos (incl. Instantly and Apify). Apify actors and Instantly campaigns are workflow nodes.
