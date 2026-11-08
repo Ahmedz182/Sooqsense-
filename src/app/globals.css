@@ -21,6 +21,7 @@
   --color-amber-ink: var(--amber-ink);
   --color-amber-soft: var(--amber-soft);
   --color-on-amber: var(--on-amber);
+  --color-accent-display: var(--accent-display);
   --color-mint: var(--mint);
   --color-mint-soft: var(--mint-soft);
   --color-blue: var(--blue);
@@ -45,6 +46,7 @@
 }
 
 @layer base {
+  .font-helvetica { --font-brand: "Helvetica Neue", Helvetica, Arial, sans-serif; }
   html {
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;

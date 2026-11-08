@@ -3,8 +3,8 @@
  * shadow and motion. Every page and component reads these variables, so a landing
  * version restyles the whole site by editing THIS file (or `version.css`) only.
  *
- * Palette lineage: sooqsense.com (warm cream, amber, mint/blue status tags) —
- * re-tuned for WCAG AA in both themes and with far less pure black.
+ * Palette (round 2): cream, near-black and orange. "amber" token names are kept
+ * for compatibility but now hold the brand orange. AA-checked in both themes.
  */
 
 :root,
@@ -12,27 +12,28 @@
   color-scheme: light;
 
   /* surfaces */
-  --bg: #faf8f4;
+  --bg: #f8f4ec;
   --bg-elev: #ffffff;
-  --bg-sunken: #f3efe8;
-  --bg-inverse: #1f1b16;
+  --bg-sunken: #f1ebdf;
+  --bg-inverse: #121110;
 
   /* text */
-  --ink: #1c1915;
-  --ink-2: #4a453d;
-  --ink-3: #6b6458; /* 5.4:1 on --bg */
-  --ink-inverse: #f6f2ea;
+  --ink: #141210;
+  --ink-2: #45403a;
+  --ink-3: #686158; /* 5.4:1 on --bg */
+  --ink-inverse: #f6f1e7;
 
   /* lines */
-  --line: #e6e0d6;
-  --line-strong: #d3cbbd;
+  --line: #e5ded1;
+  --line-strong: #d2c9b9;
 
   /* brand */
-  --amber: #e8962f; /* fills, glows, buttons */
-  --amber-hover: #dd8820;
-  --amber-ink: #9a5806; /* amber TEXT on light — 5.6:1 */
-  --amber-soft: #fcecd6;
-  --on-amber: #1f1405;
+  --amber: #f06a1a; /* fills, glows, buttons */
+  --amber-hover: #dd5c10;
+  --amber-ink: #b04807; /* amber TEXT on light — 5.6:1 */
+  --amber-soft: #fde6d6;
+  --on-amber: #1a0e05;
+  --accent-display: #e25d10; /* emphasised word in large headings — 3.4:1, AA for large text */
 
   /* status / accents */
   --mint: #1d7f55;
@@ -48,7 +49,7 @@
   --shadow-sm: 0 1px 2px rgb(40 30 15 / 0.06), 0 1px 1px rgb(40 30 15 / 0.04);
   --shadow-md: 0 8px 24px -8px rgb(40 30 15 / 0.14), 0 2px 6px rgb(40 30 15 / 0.05);
   --shadow-lg: 0 32px 64px -24px rgb(40 30 15 / 0.22), 0 8px 20px -8px rgb(40 30 15 / 0.08);
-  --glow-amber: 0 12px 32px -8px rgb(232 150 47 / 0.45);
+  --glow-amber: 0 12px 32px -8px rgb(240 106 26 / 0.35);
   --grid-dot: rgb(28 25 21 / 0.08);
 }
 
@@ -56,24 +57,25 @@
   color-scheme: dark;
 
   /* warm charcoal, not black */
-  --bg: #16130f;
-  --bg-elev: #1f1b16;
-  --bg-sunken: #110f0c;
-  --bg-inverse: #faf8f4;
+  --bg: #121110;
+  --bg-elev: #1b1916;
+  --bg-sunken: #0c0b0a;
+  --bg-inverse: #f8f4ec;
 
-  --ink: #f4efe6;
-  --ink-2: #cdc5b7;
-  --ink-3: #9d9486; /* 6.2:1 on --bg */
-  --ink-inverse: #1c1915;
+  --ink: #f6f1e7;
+  --ink-2: #cfc8bb;
+  --ink-3: #a0988a; /* 6.2:1 on --bg */
+  --ink-inverse: #141210;
 
-  --line: #2f2a23;
-  --line-strong: #3f382e;
+  --line: #2a2622;
+  --line-strong: #3a352f;
 
-  --amber: #f0a54a;
-  --amber-hover: #f5b465;
-  --amber-ink: #f5b566;
-  --amber-soft: #3a2a15;
-  --on-amber: #1f1405;
+  --amber: #f47a2a;
+  --amber-hover: #f78d45;
+  --amber-ink: #f7954f;
+  --amber-soft: #3a2111;
+  --on-amber: #1a0e05;
+  --accent-display: #f7843a;
 
   --mint: #62d3a2;
   --mint-soft: #15372a;
@@ -87,7 +89,7 @@
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
   --shadow-md: 0 8px 24px -8px rgb(0 0 0 / 0.5), 0 2px 6px rgb(0 0 0 / 0.25);
   --shadow-lg: 0 32px 64px -24px rgb(0 0 0 / 0.6), 0 8px 20px -8px rgb(0 0 0 / 0.3);
-  --glow-amber: 0 12px 36px -8px rgb(240 165 74 / 0.35);
+  --glow-amber: 0 12px 36px -8px rgb(244 122 42 / 0.35);
   --grid-dot: rgb(244 239 230 / 0.07);
 }
 

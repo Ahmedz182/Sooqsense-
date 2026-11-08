@@ -47,7 +47,37 @@ const satoshi = localFont({
   display: "swap",
 });
 
-const brandFonts = { geist, general: generalSans, instrument: instrumentSans, satoshi } as const;
+
+/** Poppins (SIL OFL, via Fontsource 5.3.0 files). */
+const poppins = localFont({
+  src: [
+    { path: "../fonts/Poppins-400.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/Poppins-500.woff2", weight: "500", style: "normal" },
+    { path: "../fonts/Poppins-600.woff2", weight: "600", style: "normal" },
+  ],
+  variable: "--font-brand",
+  display: "swap",
+});
+
+/** Raleway (SIL OFL, via Fontsource 5.3.0 files). */
+const raleway = localFont({
+  src: [
+    { path: "../fonts/Raleway-400.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/Raleway-500.woff2", weight: "500", style: "normal" },
+    { path: "../fonts/Raleway-600.woff2", weight: "600", style: "normal" },
+  ],
+  variable: "--font-brand",
+  display: "swap",
+});
+
+/**
+ * Helvetica is not licensable as a free web font, so this option uses the
+ * visitor's installed Helvetica Neue / Helvetica (Apple devices) and falls
+ * back to Arial elsewhere. See `.font-helvetica` in globals.css.
+ */
+const helvetica = { variable: "font-helvetica" } as const;
+
+const brandFonts = { geist, general: generalSans, instrument: instrumentSans, satoshi, poppins, raleway, helvetica } as const;
 export type BrandFont = keyof typeof brandFonts;
 
 const choice = (process.env.NEXT_PUBLIC_FONT || "geist") as BrandFont;
