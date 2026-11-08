@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, type CSSProperties } from "react";
 import { siteConfig } from "@/config/site";
 import { ButtonLink } from "@/components/ui/Button";
 import { TrialButton } from "@/components/ui/TrialButton";
@@ -34,7 +34,16 @@ export function Hero() {
     <section ref={root} aria-labelledby="hero-title" className="overflow-hidden pt-16 md:pt-24">
       <div className="container-x text-center">
         <h1 id="hero-title" className="text-display mx-auto font-semibold tracking-[-0.03em] text-ink">
-          Your next deal starts in your <Em>inbox</Em>.
+          {["Your", "Next", "Deal", "Starts", "In", "Your"].map((w, i) => (
+            <span key={i}>
+              <span className="hero-word" style={{ "--i": i } as CSSProperties}>
+                {w}
+              </span>{" "}
+            </span>
+          ))}
+          <span className="hero-word" style={{ "--i": 6 } as CSSProperties}>
+            <Em>Inbox</Em>.
+          </span>
         </h1>
         <p className="text-lead mx-auto mt-5 max-w-[34rem] text-ink-2">
           SooqSense takes it from there — follow-ups, meeting notes and CRM updates, ready for you to approve.

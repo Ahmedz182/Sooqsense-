@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
+import { SectionReveal } from "@/components/motion/SectionReveal";
 
 /**
  * Every page renders inside SiteShell, so header, footer, spacing and theme are
@@ -20,6 +21,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
         {children}
       </main>
       <Footer />
+      <SectionReveal />
     </>
   );
 }
