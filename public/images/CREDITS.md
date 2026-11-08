@@ -25,3 +25,4 @@ They are stock models used ONLY as illustrative avatars inside product mock-ups.
 | workspace/team-laptops.webp | photo-1522071820081-009f0129c71c |
 | workspace/team-planning.webp | photo-1552664730-d307ca884978 |
 | workspace/deal-high-five.webp | photo-1600880292203-757bb62b4baf |
+| people/ahmed-fayyaz.webp, people/ahmed-fayyaz-lg.webp | Supplied by Ahmed Fayyaz for use on this site |

@@ -11,6 +11,9 @@ export const owner = {
   email: "iamahmedfayyaz@gmail.com",
   title: "Head of Sales",
   company: "SooqSense",
+  /** Real photo supplied by Ahmed Fayyaz (2026-11-08). Small avatar + large for the founder note. */
+  photo: "/images/people/ahmed-fayyaz.webp",
+  photoLarge: "/images/people/ahmed-fayyaz-lg.webp",
 } as const;
 
 export type DemoPerson = {
