@@ -148,3 +148,23 @@ blobs, small floating tool tiles, live details (office local times), a searchabl
 - Storytelling like Apple product pages: one sticky product stage, chapters change inside it as you scroll; chapter progress indicator.
 - Trust: real customer logos/quotes, founder note + photo, true security facts (owner supplies; placeholders until then).
 - Real integration logos from public/logos (incl. Instantly and Apify). Apify actors and Instantly campaigns are workflow nodes.
+
+## 9. Round 2b — owner feedback after watching all round-1 videos (2026-11-08)
+
+All three round-1 versions share the same faults: weak heading styling, unprofessional fonts, empty sections,
+no imagery, an unappealing app mock-up, no people, no trust. Round 2 must fix all of these:
+
+- **Fonts:** compare Poppins, Helvetica (system stack) and Raleway (Geist as a baseline) — `NEXT_PUBLIC_FONT`.
+- **Headings:** short and set well; **one emphasised word may use `text-accent-display`** (the orange made for large text).
+- **Palette:** cream, near-black and orange (tokens updated). Alternate cream sections with near-black sections for rhythm.
+- **Imagery:** use the professional photos in `public/images/people` (avatars in product UI only) and `public/images/workspace`.
+  Stock photos must never be presented as real customers or attached to testimonials.
+- **Product UI must be appealing and rich:** avatars, people and their connections (who knows whom, deal team), a
+  customer detail panel (company, role, deal, timeline, health), real integration logos inside the UI.
+- **Professional workflows that visibly work:** a drag-and-drop workflow canvas (React Flow) with Apify / Instantly /
+  HubSpot / Gmail nodes, running state, nodes being dragged and connected — engaging for customers and investors.
+- **Trust everywhere:** trusted-by logo row, testimonials and reviews, ratings, security facts, founder note.
+  Until the owner supplies real ones, content comes from `src/config/trust.ts` entries marked `sample: true`, shown with
+  a small "Sample" tag and only when `NEXT_PUBLIC_SHOW_SAMPLE_PROOF=true` (preview builds). Production hides samples.
+  Sample testimonials use initials avatars and fictional company wordmarks — never stock photos or real company logos.
+- **No empty space:** every viewport while scrolling shows meaningful content; build curiosity section by section.
