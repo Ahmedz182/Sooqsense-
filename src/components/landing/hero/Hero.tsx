@@ -4,34 +4,15 @@ import { useRef, type CSSProperties } from "react";
 import { siteConfig } from "@/config/site";
 import { ButtonLink } from "@/components/ui/Button";
 import { TrialButton } from "@/components/ui/TrialButton";
-import { gsap, useScene } from "../shared/useScene";
-import { HeroWindow } from "./HeroWindow";
-import { LogoStrip } from "./LogoStrip";
 import { Em } from "../shared/SectionHead";
-import { TrustedBy } from "../trust/TrustedBy";
 
-/** Headline, one sentence, two buttons, one product window. Nothing else. */
+/** Headline, one sentence, two buttons, one trust line. The product window continues in <Showcase />. */
 export function Hero() {
   const root = useRef<HTMLElement>(null);
 
-  // The window starts tilted back and eases flat as you scroll — scrubbed 1:1.
-  useScene(root, ({ narrow }) => {
-    const win = root.current?.querySelector<HTMLElement>("[data-hero-window]");
-    if (!win) return;
-    gsap.fromTo(
-      win,
-      { rotateX: narrow ? 10 : 16, scale: narrow ? 0.97 : 0.94, transformPerspective: 1800, transformOrigin: "50% 0%" },
-      {
-        rotateX: 0,
-        scale: 1,
-        ease: "none",
-        scrollTrigger: { trigger: root.current, start: "top top", end: narrow ? "+=360" : "+=560", scrub: true },
-      },
-    );
-  });
 
   return (
-    <section ref={root} aria-labelledby="hero-title" className="overflow-hidden pt-16 md:pt-24">
+    <section ref={root} aria-labelledby="hero-title" className="overflow-hidden pb-4 pt-16 md:pt-24">
       <div className="container-x text-center">
         <h1 id="hero-title" className="text-display mx-auto font-semibold tracking-[-0.03em] text-ink">
           {["Your", "Next", "Deal", "Starts", "In", "Your"].map((w, i) => (
@@ -60,13 +41,6 @@ export function Hero() {
           Read-only by default<span aria-hidden="true"> · </span>GDPR-ready
         </p>
       </div>
-      <div className="container-x mt-14 md:mt-20">
-        <div data-hero-window className="hero-tilt mx-auto max-w-[1120px] will-change-transform" aria-hidden="true">
-          <HeroWindow />
-        </div>
-      </div>
-      <LogoStrip />
-      <TrustedBy />
     </section>
   );
 }

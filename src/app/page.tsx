@@ -1,6 +1,9 @@
 import { SiteShell } from "@/components/layout/SiteShell";
 import { Hero } from "@/components/landing/hero/Hero";
 import { Story } from "@/components/landing/story/Story";
+import { Showcase } from "@/components/landing/showcase/Showcase";
+import { LogoStrip } from "@/components/landing/hero/LogoStrip";
+import { TrustedBy } from "@/components/landing/trust/TrustedBy";
 import { Outcomes } from "@/components/landing/outcomes/Outcomes";
 import { Account } from "@/components/landing/account/Account";
 import { Meetings } from "@/components/landing/meetings/Meetings";
@@ -17,6 +20,11 @@ export default function HomePage() {
   return (
     <SiteShell>
       <Hero />
+      <Showcase />
+      <section aria-label="Integrations and customers">
+        <LogoStrip />
+        <TrustedBy />
+      </section>
       <Story />
       <Outcomes />
       <Account />
